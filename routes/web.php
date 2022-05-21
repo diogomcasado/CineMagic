@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//filmes
+Route::get('filme/list', 'App\Http\Controllers\FilmesController@index')->name('filmes.list');
+
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
