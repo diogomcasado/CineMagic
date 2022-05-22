@@ -18,7 +18,8 @@ Route::get('/', function () {
 });
 
 //filmes
-Route::get('filme/list', 'App\Http\Controllers\FilmesController@index')->name('filmes.list');
+Route::get('filmes', 'App\Http\Controllers\FilmesController@index')->name('filmes.list');
+Route::get('filme/{id}', 'App\Http\Controllers\FilmesController@detalhes');
 
 
 Auth::routes();

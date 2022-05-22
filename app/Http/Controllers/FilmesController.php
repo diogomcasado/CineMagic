@@ -9,6 +9,11 @@ class FilmesController extends Controller
 {
     public function index(Request $request)
     {
+        $filmesList = Filme::orderBy('id')->simplePaginate(12);
+        return view('filmes.list', compact('filmesList'));
+
+
+        /*
         $filmes = Filme::whereNull('custom');
 
         if ($request->inputsearch) {
@@ -37,7 +42,20 @@ class FilmesController extends Controller
         //$categorias = Categoria::all();
         $request->flash();
         return view('filme.list'); //, compact('xx', 'xx', 'xx', 'categorias'));
+        */
     }
+
+    public function detalhes(Request $request)
+    {
+        $filme = Filme::findOrFail($request->route('id'));
+
+        $data = array (
+            "filme" => $filme
+        );
+
+        return view('filmes.detalhes') ->with($data);
+    }
+
 
 
 }

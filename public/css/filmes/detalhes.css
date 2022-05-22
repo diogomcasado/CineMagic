@@ -1,0 +1,71 @@
+.titulo {
+    margin-left: 10%;
+    
+}
+
+.filme {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    margin-top: 15px;
+    width: 100%;
+    
+
+}
+
+.caixa{
+
+    margin-left: 7%;
+    margin-right: 10%;
+}
+
+.caixa p {
+    word-wrap: break-word;
+}
+
+.filme-imagem {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    /*background-color: green; */
+
+}
+
+.filme-info-area {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    /*background-color: blue; */
+
+}
+
+.filme-imagem img {
+    width: 300px;
+    height: auto;
+    margin-left: 25%;
+}
+
+.cart-btn {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+
+    margin-top: 30px;
+    margin-bottom: 10px;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.column1 {
+
+    width: 35%;
+}
+
+.column2 {
+
+    width: 65%;
+}
