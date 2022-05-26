@@ -33,6 +33,11 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
+                        <div style="margin-left: 10px;">
+                            @if(Auth::user() and Auth::user()->tipo == 'A')
+                            <a href="{{ route('user.list') }}">| Lista Clientes</a>
+                            @endif
+                        </div>
 
                     </ul>
 

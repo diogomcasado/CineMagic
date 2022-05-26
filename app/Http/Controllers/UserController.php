@@ -24,17 +24,32 @@ class UserController extends Controller
         return view('user.profile', compact('user', 'cliente'));
     }
 
-    public function edit9999()
+    public function list()
     {
-        $id = Auth::id();
-        $cliente = Cliente::find($id);
-        if ($cliente) {
-            return view('user.profile', compact('cliente'));
-        } else {
-            $user = User::findOrFail($id);
-            return view('user.profile', compact('user'));
-        }
+        $users = User::paginate(25);
+
+        return view('user.list', compact('users'));
     }
+
+    public function bloquear(User $user)
+    {
+
+        $user->bloqueado = $user->bloqueado == '1' ? '0' : '1';
+        $user->save();
+
+        return redirect()->back();
+    }
+
+    public function destroy(User $user)
+    {
+        if ($user->tipo == 'C') {
+            $user->cliente->delete();
+        }
+        $user->delete();
+
+        return redirect()->route('user.list');
+    }
+
 
     public function edit(Request $request)
     {
