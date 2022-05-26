@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Sessao extends Model
 {
     use HasFactory;
+
+    public function filme()
+    {
+        return $this->belongsTo('App\Models\Filme', 'filme_id');
+    }
 }

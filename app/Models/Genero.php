@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Genero extends Model
 {
     use HasFactory;
+
+    public function filmes()
+    {
+        return $this->hasMany('App\Models\Filme');
+    }
 }
