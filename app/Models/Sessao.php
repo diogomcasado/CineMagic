@@ -9,6 +9,8 @@ class Sessao extends Model
 {
     use HasFactory;
 
+    protected $table = 'sessoes';
+
     public function filme()
     {
         return $this->belongsTo('App\Models\Filme', 'filme_id');

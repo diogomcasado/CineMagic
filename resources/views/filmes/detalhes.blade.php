@@ -41,6 +41,12 @@
         </div>
     </div>
 
+    <select name="sessao" id="idSessao">
+        @foreach($filme->sessao as $abr => $id)
+        <option value="{{$abr}}" {{old('sessao')==$abr?'selected':''}}>{{$id->data}} {{$id->horario_inicio}} Sala: {{$id->sala_id}}</option>
+        @endforeach
+    </select>
+
     <div class="cart-btn">
         <button class="btn btn-primary" type="submit">ADD to Cart</button>
     </div>
