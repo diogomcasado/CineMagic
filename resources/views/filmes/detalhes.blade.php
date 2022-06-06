@@ -33,10 +33,24 @@
                     <div class="filme-label">Genero: </div>
                     <div class="filme-info-desc">{{ $filme->genero_code}}</div>
                     </p>
-                    <p>&nbsp;</p>
+                    
                     <p>
                     <div class="filme-label">Ano: </div>
                     <div class="filme-info-desc">{{ $filme->ano}}</div>
+                    <!-- <div class="filme-info-trailer">{{ $filme->trailer_url}}</div> -->
+
+                    <?php 
+                     $url= $filme->trailer_url;
+                     $urlParts   = explode('/', $url);
+                     $vidid      = explode( '&', str_replace('watch?v=', '', end($urlParts) ) );
+
+                     $trailer= 'https://www.youtube.com/embed/' . $vidid[0] ;
+                    ?>  
+                                    
+                      <iframe width="430" height="315" src="{{ $trailer}}"
+                        title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; 
+                        clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                   
                     </p>
                 </div>
             </div>

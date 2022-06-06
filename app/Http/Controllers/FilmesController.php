@@ -10,6 +10,7 @@ use Illuminate\Pagination\Paginator;
 
 class FilmesController extends Controller
 {
+ 
     public function index(Request $request)
     {
         $dataHoje = Carbon::now()->toDateString();
@@ -26,7 +27,7 @@ class FilmesController extends Controller
         $filme = Filme::findOrFail($request->route('id'));
 
         $sessoes = $filme->sessao->where('data', '>', Carbon::today());
-
+      
 
 
         $data = array (
@@ -38,6 +39,7 @@ class FilmesController extends Controller
         //dd($sessoes);
 
         return view('filmes.detalhes') ->with($data);
+       
     }
 
 
