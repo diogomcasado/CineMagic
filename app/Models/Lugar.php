@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Lugar extends Model
 {
     use HasFactory;
+
+    public function sala()
+    {
+        return $this->belongsTo('App\Models\Sala', 'sala_id');
+    }
 }

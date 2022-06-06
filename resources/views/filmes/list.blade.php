@@ -4,9 +4,9 @@
 
 
 @section('content')
-    <h1>Catalogo</h1>
+    <h1>Catálogo</h1>
     <div class="filmes-list">
-        @foreach ($filmesList as $filmes => $filme)
+        @foreach ($filmesListFinal as $filmes => $filme)
         <span class="filme">
             <a href="/filme/{{$filme->id}}">
                 <img src="{{ Storage::url('/cartazes/' . $filme->cartaz_url) }}" alt="filme_image">
@@ -17,6 +17,6 @@
         @endforeach
     </div>
 
-    {{ $filmesList->links() }}
+    {{ $filmesListFinal->links() }}
 @endsection
 

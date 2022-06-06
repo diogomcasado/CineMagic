@@ -15,4 +15,9 @@ class Sessao extends Model
     {
         return $this->belongsTo('App\Models\Filme', 'filme_id');
     }
+
+    public function sala()
+    {
+        return $this->belongsTo('App\Models\Sala', 'sala_id');
+    }
 }

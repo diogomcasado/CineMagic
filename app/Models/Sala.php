@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Sala extends Model
 {
     use HasFactory;
+
+    public function sessao()
+    {
+        return $this->hasMany("App\Models\Sessao");
+    }
+
+    public function lugar()
+    {
+        return $this->hasMany("App\Models\Lugar");
+    }
 }
