@@ -21,12 +21,25 @@ Route::get('/', function () {
 Route::get('filmes', 'App\Http\Controllers\FilmesController@index')->name('filmes.list');
 Route::get('filme/{id}', 'App\Http\Controllers\FilmesController@detalhes');
 
+Route::get('filmes/lista', 'App\Http\Controllers\filmesController@list')->middleware(['auth', 'verified'])->name('filme.lista');
+// Route::get('profile', 'App\Http\Controllers\filmesController@index2')->middleware(['auth', 'verified'])->name('filme.profile');
+// Route::post('profile', 'App\Http\Controllers\filmesController@edit')->middleware(['auth', 'verified'])->name('filme.edit');
+Route::delete('filme/apagar/{filme}','App\Http\Controllers\filmesController@destroy')->middleware(['auth', 'verified'])->name('filme.destroy');
+
+
 //users
 Route::get('user/list', 'App\Http\Controllers\UserController@list')->middleware(['auth', 'verified'])->name('user.list');
 Route::get('profile', 'App\Http\Controllers\UserController@index')->middleware(['auth', 'verified'])->name('user.profile');
 Route::post('profile', 'App\Http\Controllers\UserController@edit')->middleware(['auth', 'verified'])->name('user.edit');
 Route::patch('user/bloquear/{user}','App\Http\Controllers\UserController@bloquear')->middleware(['auth', 'verified'])->name('user.bloquear');
 Route::delete('user/apagar/{user}','App\Http\Controllers\UserController@destroy')->middleware(['auth', 'verified'])->name('user.destroy');
+ 
+//Salas
+Route::get('salas/list', 'App\Http\Controllers\salasController@list')->middleware(['auth', 'verified'])->name('sala.list');
+// Route::get('profile', 'App\Http\Controllers\filmesController@index2')->middleware(['auth', 'verified'])->name('filme.profile');
+// Route::post('profile', 'App\Http\Controllers\filmesController@edit')->middleware(['auth', 'verified'])->name('filme.edit');
+Route::delete('sala/apagar/{sala}','App\Http\Controllers\SalaController@destroy')->middleware(['auth', 'verified'])->name('sala.destroy');
+
 
 
 Auth::routes();

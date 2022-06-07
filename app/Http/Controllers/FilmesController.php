@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Filme;
 use App\Models\Sessao;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 
@@ -40,6 +41,31 @@ class FilmesController extends Controller
 
         return view('filmes.detalhes') ->with($data);
        
+    }
+
+
+    /////////////////////
+
+    public function index2()
+    {
+        // $user = User::findOrFail(Auth::id());
+        // $cliente = Cliente::findOrFail(Auth::id());
+        // if($user->tipo == 'F'){
+        //     return abort(403, 'Unauthorized action.');
+        // }
+
+        #$full = $user->concat($cliente);
+
+
+        return view('filmes.lista', compact('filmes'));
+        // return view('user.profile', compact('user', 'cliente'));
+    }
+
+    public function list()
+    {
+        $filmes = Filme::paginate(25);
+
+        return view('filmes.lista', compact('filmes'));
     }
 
 

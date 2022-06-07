@@ -30,8 +30,6 @@
                     </p>
                     <p>&nbsp;</p>
                     <p>
-                    <div class="filme-label">Genero: </div>
-                    <div class="filme-info-desc">{{ $filme->genero_code}}</div>
                     </p>
                     
                     <p>
