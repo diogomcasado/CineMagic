@@ -17,6 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 //filmes
 Route::get('filmes', 'App\Http\Controllers\FilmesController@index')->name('filmes.list');
 Route::get('filme/{id}', 'App\Http\Controllers\FilmesController@detalhes');
@@ -25,8 +27,6 @@ Route::get('filmes/lista', 'App\Http\Controllers\filmesController@list')->middle
 // Route::get('profile', 'App\Http\Controllers\filmesController@index2')->middleware(['auth', 'verified'])->name('filme.profile');
 // Route::post('profile', 'App\Http\Controllers\filmesController@edit')->middleware(['auth', 'verified'])->name('filme.edit');
 Route::delete('filme/apagar/{filme}','App\Http\Controllers\filmesController@destroy')->middleware(['auth', 'verified'])->name('filme.destroy');
-
-
 
 
 //users
@@ -56,7 +56,7 @@ Route::post('clear', 'App\Http\Controllers\CartController@clear')->name('cart.cl
 Route::get('admin', 'App\Http\Controllers\ConfiguracaoController@index')->middleware(['auth', 'verified'])->name('config');
 Route::post('admin', 'App\Http\Controllers\ConfiguracaoController@edit')->middleware(['auth', 'verified'])->name('config.edit');
 
+Auth::routes(['verify' => true]);
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
