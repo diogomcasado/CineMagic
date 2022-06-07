@@ -27,6 +27,8 @@ Route::get('filmes/lista', 'App\Http\Controllers\filmesController@list')->middle
 Route::delete('filme/apagar/{filme}','App\Http\Controllers\filmesController@destroy')->middleware(['auth', 'verified'])->name('filme.destroy');
 
 
+
+
 //users
 Route::get('user/list', 'App\Http\Controllers\UserController@list')->middleware(['auth', 'verified'])->name('user.list');
 Route::get('profile', 'App\Http\Controllers\UserController@index')->middleware(['auth', 'verified'])->name('user.profile');
@@ -39,6 +41,8 @@ Route::get('salas/list', 'App\Http\Controllers\salasController@list')->middlewar
 // Route::get('profile', 'App\Http\Controllers\filmesController@index2')->middleware(['auth', 'verified'])->name('filme.profile');
 // Route::post('profile', 'App\Http\Controllers\filmesController@edit')->middleware(['auth', 'verified'])->name('filme.edit');
 Route::delete('sala/apagar/{sala}','App\Http\Controllers\SalaController@destroy')->middleware(['auth', 'verified'])->name('sala.destroy');
+Route::get('filmes/lista/create', [App\Http\Controllers\FilmesController::class, 'create'])->name('filmes.create')->middleware(['auth', 'verified']);
+Route::post('filmes', [App\Http\Controllers\FilmesController::class, 'store'])->name('filmes.store')->middleware(['auth', 'verified']);
 
 
 //cart

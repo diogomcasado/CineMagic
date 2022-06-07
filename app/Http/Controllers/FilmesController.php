@@ -68,7 +68,21 @@ class FilmesController extends Controller
         return view('filmes.lista', compact('filmes'));
     }
 
-
+    public function create()
+    {
+        $filme = new Filme();
+        
+        return view('filmes.create')
+            ->withFilme($filme);
+            
+    }
+    public function store(FilmePost $request)
+    {
+        $newFilme = Filme::create($request->validated());
+        return redirect()->route('admin.filmes')
+            ->with('alert-msg', 'Filme "' . $newFilmes->nome . '" foi criada com sucesso!')
+            ->with('alert-type', 'success');
+    }
 
 
 }
