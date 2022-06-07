@@ -1,0 +1,24 @@
+.filme-imagem img {
+    width: 100px;
+    display: block;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+.quantidade {
+    width: 60px;
+    text-align: center;
+    margin-right: 15px;
+}
+
+.col-img {
+    width: 180px;
+}
+
+@media (max-width: 1000px) {
+    .col-img {
+        width: 110px;
+    }
+}

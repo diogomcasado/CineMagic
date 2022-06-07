@@ -41,6 +41,13 @@ Route::get('salas/list', 'App\Http\Controllers\salasController@list')->middlewar
 Route::delete('sala/apagar/{sala}','App\Http\Controllers\SalaController@destroy')->middleware(['auth', 'verified'])->name('sala.destroy');
 
 
+//cart
+Route::post('update-cart', 'App\Http\Controllers\CartController@updateCart')->name('cart.update');
+Route::post('cart', 'App\Http\Controllers\CartController@add')->name('cart.store');
+Route::get('cart', 'App\Http\Controllers\CartController@list')->name('cart.list');
+Route::post('remove', 'App\Http\Controllers\CartController@remove')->name('cart.remove');
+Route::post('clear', 'App\Http\Controllers\CartController@clear')->name('cart.clear');
+
 
 Auth::routes();
 
