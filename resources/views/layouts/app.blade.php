@@ -75,6 +75,9 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                @if(Auth::user() and Auth::user()->tipo == 'A')
+                                <a class="dropdown-item" href="{{ route('config') }}">Configurações</a>
+                                @endif
 
                                 <a class="dropdown-item" href="{{ route('user.edit') }}">Perfil</a>
 

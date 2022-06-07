@@ -17,6 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 //filmes
 Route::get('filmes', 'App\Http\Controllers\FilmesController@index')->name('filmes.list');
 Route::get('filme/{id}', 'App\Http\Controllers\FilmesController@detalhes');
@@ -48,7 +50,11 @@ Route::get('cart', 'App\Http\Controllers\CartController@list')->name('cart.list'
 Route::post('remove', 'App\Http\Controllers\CartController@remove')->name('cart.remove');
 Route::post('clear', 'App\Http\Controllers\CartController@clear')->name('cart.clear');
 
+//admin
+Route::get('admin', 'App\Http\Controllers\ConfiguracaoController@index')->middleware(['auth', 'verified'])->name('config');
+Route::post('admin', 'App\Http\Controllers\ConfiguracaoController@edit')->middleware(['auth', 'verified'])->name('config.edit');
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Auth::routes(['verify' => true]);
+
+
