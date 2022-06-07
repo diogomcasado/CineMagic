@@ -28,6 +28,13 @@ Route::post('profile', 'App\Http\Controllers\UserController@edit')->middleware([
 Route::patch('user/bloquear/{user}','App\Http\Controllers\UserController@bloquear')->middleware(['auth', 'verified'])->name('user.bloquear');
 Route::delete('user/apagar/{user}','App\Http\Controllers\UserController@destroy')->middleware(['auth', 'verified'])->name('user.destroy');
 
+//cart
+Route::post('update-cart', 'App\Http\Controllers\CartController@updateCart')->name('cart.update');
+Route::post('cart', 'App\Http\Controllers\CartController@add')->name('cart.store');
+Route::get('cart', 'App\Http\Controllers\CartController@list')->name('cart.list');
+Route::post('remove', 'App\Http\Controllers\CartController@remove')->name('cart.remove');
+Route::post('clear', 'App\Http\Controllers\CartController@clear')->name('cart.clear');
+
 
 Auth::routes();
 

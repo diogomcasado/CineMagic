@@ -45,27 +45,83 @@
     width: 300px;
     height: auto;
     margin-left: 25%;
+    
 }
 
 .cart-btn {
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-
-    margin-top: 30px;
+    margin-top: 50px;
     margin-bottom: 10px;
     margin-right: 0px;
     margin-left: 0px;
 }
 
-.column1 {
+.sessao-cart {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 250px;
+    margin: auto;
+}
 
+.sessao-cart > div {
+    margin: 5px;
+    
+    text-align: center;
+    line-height: 30px;
+    font-size: 16px;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    /*background-color: DodgerBlue;*/
+  }
+  
+  .flex-container > div {
+    /*width: 100px;*/
+    margin: 1px;
+    /*text-align: center;*/
+    line-height: 30px;
+    font-size: 16px;
+  }
+
+.column1 {
     width: 35%;
 }
 
 .column2 {
-
     width: 65%;
+}
+
+@media (max-width: 1290px) {
+
+    .filme-info-area {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 100%;
+        /*background-color: blue; */
+    
+    }
+
+    .filme {
+        border: 1px solid black;
+        display: flex;
+        flex-direction: column;
+        margin-top: 15px;
+        width: 100%;
+        
+    
+    }
+
+    .filme-imagem img {
+        width: 300px;
+        height: auto;
+        margin-left: 50%;
+        margin-right: 50%;
+        
+    }
+    
+
 }
