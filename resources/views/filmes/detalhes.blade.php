@@ -24,6 +24,7 @@
 
             <div class="column2">
                 <div class="filme-info-area">
+
                     <div class="flex-container">
                         <div class="filme-label">Sumario: {{ $filme->sumario}}</div>
                         <div class="filme-label">Genero: {{ $filme->genero_code}}</div>

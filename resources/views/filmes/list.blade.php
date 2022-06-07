@@ -5,6 +5,14 @@
 
 @section('content')
     <h1>Catálogo</h1>
+    <div id="search_div_categoria" class="col-md justify-content-md-center">
+                <!-- <select id="search_categoria" name="categoria_id" class="form-control ">
+                    <option value="" selected>--Genero--</option> -->
+                   
+                    </option>
+                  
+                </select>
+            </div>
     <div class="filmes-list">
         @foreach ($filmesListFinal as $filmes => $filme)
         <span class="filme">

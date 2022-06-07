@@ -40,6 +40,9 @@
                         <div style="margin-left: 10px;">
                             @if(Auth::user() and Auth::user()->tipo == 'A')
                             <a href="{{ route('user.list') }}">| Lista Clientes</a>
+                            <a href="{{ route('filme.lista') }}">| Lista Filmes</a>
+                            <a href="{{ route('sala.list') }}">| Lista Salas</a>
+                            <a >| Lista Sessões</a>
                             @endif
                         </div>
 
