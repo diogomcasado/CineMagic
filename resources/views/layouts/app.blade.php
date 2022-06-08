@@ -44,6 +44,9 @@
                             <a href="{{ route('sala.list') }}">| Lista Salas</a>
                             <a >| Lista Sessões</a>
                             @endif
+                            @if(Auth::user() and Auth::user()->tipo == 'F')
+                            <a href="{{ route('controlo') }}">| Controlo de acesso</a>
+                            @endif
                         </div>
 
                     </ul>
@@ -75,12 +78,15 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                
                                 @if(Auth::user() and Auth::user()->tipo == 'A')
-                                <a class="dropdown-item" href="{{ route('config') }}">Configurações</a>
+                                <a href="{{route('estatisticas.index')}}">| Estatisticas</a>
                                 @endif
-
+                                
+                                @if(Auth::user() and Auth::user()->tipo != 'F')
                                 <a class="dropdown-item" href="{{ route('user.edit') }}">Perfil</a>
-
+                                @endif
+                                
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}

@@ -8,7 +8,7 @@
 <<div class="container">
 <table class="table table-bordered table-striped table-sm">
     </div>
-    <a  href="{{route('filmes.create')}}" class="btn btn-success" role="button" aria-pressed="true">Adicionar Filme</a>
+    <a class="btn btn-success" role="button" aria-pressed="true">Adicionar Filme</a>
     <table class="table">
         <thead>
              <tr> 

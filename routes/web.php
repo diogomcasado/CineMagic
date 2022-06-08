@@ -41,8 +41,6 @@ Route::get('salas/list', 'App\Http\Controllers\salasController@list')->middlewar
 // Route::get('profile', 'App\Http\Controllers\filmesController@index2')->middleware(['auth', 'verified'])->name('filme.profile');
 // Route::post('profile', 'App\Http\Controllers\filmesController@edit')->middleware(['auth', 'verified'])->name('filme.edit');
 Route::delete('sala/apagar/{sala}','App\Http\Controllers\SalaController@destroy')->middleware(['auth', 'verified'])->name('sala.destroy');
-Route::get('filmes/lista/create', [App\Http\Controllers\FilmesController::class, 'create'])->name('filmes.create')->middleware(['auth', 'verified']);
-Route::post('filmes', [App\Http\Controllers\FilmesController::class, 'store'])->name('filmes.store')->middleware(['auth', 'verified']);
 
 
 //cart
@@ -52,11 +50,16 @@ Route::get('cart', 'App\Http\Controllers\CartController@list')->name('cart.list'
 Route::post('remove', 'App\Http\Controllers\CartController@remove')->name('cart.remove');
 Route::post('clear', 'App\Http\Controllers\CartController@clear')->name('cart.clear');
 
+
+//sessao
+Route::get('controlo', 'App\Http\Controllers\SessaoController@index')->name('controlo');
+Route::get('controlo/get_sessao', 'App\Http\Controllers\SessaoController@get_sessao')->name('controlo.sessao');
+
 //admin
 Route::get('admin', 'App\Http\Controllers\ConfiguracaoController@index')->middleware(['auth', 'verified'])->name('config');
 Route::post('admin', 'App\Http\Controllers\ConfiguracaoController@edit')->middleware(['auth', 'verified'])->name('config.edit');
 
-Auth::routes(['verify' => true]);
 
+Auth::routes(['verify' => true]);
 
 
