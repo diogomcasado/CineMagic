@@ -8,6 +8,10 @@ use App\Models\Sessao;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
+use App\Http\Requests\FilmePost;
+
+
+
 
 class FilmesController extends Controller
 {
@@ -80,7 +84,7 @@ class FilmesController extends Controller
     {
         $newFilme = Filme::create($request->validated());
         return redirect()->route('admin.filmes')
-            ->with('alert-msg', 'Filme "' . $newFilmes->nome . '" foi criada com sucesso!')
+            ->with('alert-msg', 'Filme "' . $newFilme->nome . '" foi criada com sucesso!')
             ->with('alert-type', 'success');
     }
 

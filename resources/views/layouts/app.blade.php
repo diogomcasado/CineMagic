@@ -80,9 +80,9 @@
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 
                                 @if(Auth::user() and Auth::user()->tipo == 'A')
-                                <a href="{{route('estatisticas.index')}}">| Estatisticas</a>
+                                <a   >| Estatisticas</a>
                                 @endif
-                                
+                         
                                 @if(Auth::user() and Auth::user()->tipo != 'F')
                                 <a class="dropdown-item" href="{{ route('user.edit') }}">Perfil</a>
                                 @endif
