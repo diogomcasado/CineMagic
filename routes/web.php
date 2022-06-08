@@ -28,8 +28,8 @@ Route::get('filmes/lista', 'App\Http\Controllers\filmesController@list')->middle
 // Route::post('profile', 'App\Http\Controllers\filmesController@edit')->middleware(['auth', 'verified'])->name('filme.edit');
 Route::delete('filme/apagar/{filme}','App\Http\Controllers\filmesController@destroy')->middleware(['auth', 'verified'])->name('filme.destroy');
 
-Route::get('filmes/lista/create', 'App\Http\Controllers\filmesController@create'])->name('filmes.create')->middleware(['auth', 'verified']);
-Route::post('filmes', 'App\Http\Controllers\filmesController@store'])->name('filmes.store')->middleware(['auth', 'verified']);
+Route::get('filmes/lista/create', 'App\Http\Controllers\filmesController@create')->name('filmes.create')->middleware(['auth', 'verified']);
+Route::post('filmes', 'App\Http\Controllers\filmesController@store')->name('filmes.store')->middleware(['auth', 'verified']);
 
 
 //users
