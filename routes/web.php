@@ -53,6 +53,10 @@ Route::get('cart', 'App\Http\Controllers\CartController@list')->name('cart.list'
 Route::post('remove', 'App\Http\Controllers\CartController@remove')->name('cart.remove');
 Route::post('clear', 'App\Http\Controllers\CartController@clear')->name('cart.clear');
 
+//checkout
+Route::get('checkout/create','App\Http\Controllers\CheckoutsController@create')->name('checkout.create');
+
+
 
 //sessao
 Route::get('controlo', 'App\Http\Controllers\SessaoController@index')->name('controlo');

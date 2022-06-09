@@ -56,6 +56,7 @@
                                                 <button type="submit" class="btn btn-secondary">Atualizar</button>
                                             </form>
                                         </div>
+
                                     </div>
                                 </td>
                                 <td class="">
@@ -87,7 +88,11 @@
                         <form action="{{ route('cart.clear') }}" method="POST">
                             @csrf
                             <button class="btn btn-danger">Remover todos</button>
+                           
+
                         </form>
+                        <a href="{{route('checkout.create')}}" class="btn btn-success" role="button" aria-pressed="true">Checkout</a>
+
                     </div>
 
 
