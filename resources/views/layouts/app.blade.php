@@ -12,7 +12,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
+    
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -56,6 +56,7 @@
                         <!-- Authentication Links -->
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('cart.list') }}">Carrinho {{ Cart::getTotalQuantity()}}</a>
+                       
                         </li>
                         @guest
                         @if (Route::has('login'))
@@ -100,6 +101,7 @@
                         @endguest
                     </ul>
                 </div>
+                
             </div>
         </nav>
 
