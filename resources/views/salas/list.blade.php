@@ -8,7 +8,7 @@
 <<div class="container">
 <table class="table table-bordered table-striped table-sm">
     </div>
-    <a class="btn btn-success" role="button" aria-pressed="true">Adicionar sala</a>
+    <a href="{{route('salas.create')}}" class="btn btn-success" role="button" aria-pressed="true">Adicionar sala</a>
     <table class="table">
         <thead>
              <tr> 

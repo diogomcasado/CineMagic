@@ -22,7 +22,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //filmes
 Route::get('filmes', 'App\Http\Controllers\FilmesController@index')->name('filmes.list');
 Route::get('filme/{id}', 'App\Http\Controllers\FilmesController@detalhes');
-
 Route::get('filmes/lista', 'App\Http\Controllers\filmesController@list')->middleware(['auth', 'verified'])->name('filme.lista');
 // Route::get('profile', 'App\Http\Controllers\filmesController@index2')->middleware(['auth', 'verified'])->name('filme.profile');
 Route::put('filmes/{filme}/update', 'App\Http\Controllers\filmesController@update')->name('filme.update')->middleware(['auth', 'verified']);
@@ -42,10 +41,11 @@ Route::delete('user/apagar/{user}','App\Http\Controllers\UserController@destroy'
  
 //Salas
 Route::get('salas/list', 'App\Http\Controllers\salasController@list')->middleware(['auth', 'verified'])->name('sala.list');
-// Route::get('profile', 'App\Http\Controllers\filmesController@index2')->middleware(['auth', 'verified'])->name('filme.profile');
-// Route::post('profile', 'App\Http\Controllers\filmesController@edit')->middleware(['auth', 'verified'])->name('filme.edit');
-Route::delete('sala/apagar/{sala}','App\Http\Controllers\SalaController@destroy')->middleware(['auth', 'verified'])->name('sala.destroy');
-
+Route::put('salas/{sala}/update', 'App\Http\Controllers\salasController@update')->name('sala.update')->middleware(['auth', 'verified']);
+Route::get('sala/{sala}/edit', 'App\Http\Controllers\salasController@edit')->middleware(['auth', 'verified'])->name('sala.edit');
+Route::delete('sala/apagar/{sala}','App\Http\Controllers\salasController@destroy')->middleware(['auth', 'verified'])->name('sala.destroy');
+Route::get('salas/lista/create', 'App\Http\Controllers\salasController@create')->name('salas.create')->middleware(['auth', 'verified']);
+Route::post('salas', 'App\Http\Controllers\salasController@store')->name('salas.store')->middleware(['auth', 'verified']);
 
 //cart
 Route::post('update-cart', 'App\Http\Controllers\CartController@updateCart')->name('cart.update');
