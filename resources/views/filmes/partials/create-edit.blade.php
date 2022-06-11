@@ -17,15 +17,21 @@
 
 <div class="form-group">
   <label for="inputNome">URL Trailer</label>
-  <input type="text" class="form-control" name="nome" id="inputNome" value="{{old('URLTrailer', $filme->trailer_code)}}" />
+  <input type="text" class="form-control" name="nome" id="inputNome" value="{{old('URLTrailer', $filme->trailer_url)}}" />
     @error('nome')
         <div class="small text-danger">{{$message}}</div>
     @enderror
 </div>
 <div class="form-group">
-  <label for="inputCurso">Genero</label>
-  <select class="form-control" name="genero" id="inputGenero">
-  
+    <label for="inputGenero">Genero</label>
+    <select class="form-control" name="Genero" id="inputGenenro">
+    @foreach ($generos as $abr => $nome)
+           <option value={{$abr}} {{$abr == old('filme', $filme->genero_code) ? 'selected' : ''}}>{{$nome}}</option>
+        @endforeach
+    </select>
+    @error('genero')
+        <div class="small text-danger">{{$message}}</div>
+    @enderror
 </div>
 
 

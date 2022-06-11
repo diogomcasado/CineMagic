@@ -24,8 +24,10 @@ class FilmePost extends FormRequest
     public function rules()
     {
          return  [
-             'titulo' =>       'required'
-             
+             'titulo' =>       'required',
+             'genero_code' =>  'required',
+             'sumario' =>       'required',
+             'url_code' =>       'required'     
          ];
     }
 }

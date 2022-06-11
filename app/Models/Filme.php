@@ -9,7 +9,7 @@ class Filme extends Model
 {
     use HasFactory;
     protected $fillable = [
-         'titulo'//,'genero_code'
+         'titulo','sumario',"genero_code","url_code"
     ];
     public function sessao()
     {

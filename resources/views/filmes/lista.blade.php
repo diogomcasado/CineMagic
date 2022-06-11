@@ -12,6 +12,7 @@
     <table class="table">
         <thead>
              <tr> 
+                <th></th>
                 <th>ID</th>
                 <th>Titulo</th>
                 <th>Genero</th>
@@ -25,6 +26,9 @@
         <tbody>
             @foreach ($filmes as $filme)
                 <tr>
+                    <td>
+                        <img src="{{$filme->cartaz_url ? asset('storage/cartazes/' . $filme->cartaz_url) : asset('img/default_img.png') }}" alt="Foto do aluno"  class="img-profile rounded-circle" style="width:40px;height:40px">
+                    </td>
                     <td>{{$filme->id}}</td>
                     <td>{{$filme->titulo}}</td>
                     <td>{{$filme->genero_code}}</td>
@@ -32,13 +36,14 @@
                    
               
                 <td>
-                    <form method="GET" action=""
+                    <form  action="{{ route('filme.edit', ['filme' => $filme->id]) }}"
                         style="display: inline">
                         @csrf
                         <input type="hidden" name="_method" value="get">
                         <button class="btn btn-secondary btn-sm">Editar</button>
                     </form>
                     <td>
+                        
                     <form method="POST" action="{{ route('filme.destroy', ['filme' => $filme->id]) }}"
                         style="display: inline" onsubmit="return confirm('Deseja apagar este filme?');">
                         @csrf

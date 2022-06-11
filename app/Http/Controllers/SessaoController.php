@@ -23,7 +23,7 @@ class SessaoController extends Controller
             $query->where('data', '>', Carbon::now()->toDateString());
         })->get();
 
-        dd($filmesListFinal);
+        // dd($filmesListFinal);
 
         return view('sessao.controlo', compact('filmesListFinal'));
     }

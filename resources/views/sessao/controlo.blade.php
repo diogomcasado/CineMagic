@@ -43,12 +43,13 @@
             <select name="city_id" id="sessao" class="form-control">
                 <option value="">{{ trans('global.pleaseSelect') }}</option>
             </select>
-        </div>
 
+        </div>
+        
         <div class="col-12">
             <label for="email" class="form-label">Horario: </label>
         </div>
-
+        
 
         <div class="btn">
             <button class="w-100 btn btn-primary btn-lg" type="submit">Guardar</button>

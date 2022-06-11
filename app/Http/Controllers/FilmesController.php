@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Filme;
+use App\Models\Genero;
 use App\Models\Sessao;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -75,17 +76,59 @@ class FilmesController extends Controller
     public function create()
     {
         $filme = new Filme();
-
+        // $generos = Genero::pluck('code', 'nome');
         return view('filmes.create')
             ->withFilme($filme);
+            
 
     }
     public function store(FilmePost $request)
     {
         $newFilme = Filme::create($request->validated());
-        return redirect()->route('admin.filmes')
-            ->with('alert-msg', 'Filme "' . $newFilme->nome . '" foi criada com sucesso!')
+        return redirect()->route('filmes')
+            ->with('alert-msg', 'Filme "' . $newFilme->titulo . '" foi criada com sucesso!')
             ->with('alert-type', 'success');
+    }
+    public function edit(Filme $filme)
+    {
+        $filmes = Filme::all();
+        return view('filmes.edit')
+            ->withFilme($filme);
+            
+    }
+    public function update(FilmePost $request, Filme $filme)
+    {
+        $validated_data = $request->validated();
+        $titulo->fill($validated_data);
+        $titulo->save();
+        return redirect()->route('filmes.create')
+            ->with('alert-msg', 'Filme "' . $filme->titulo . '" foi alterado com sucesso!')
+            ->with('alert-type', 'success');
+    }
+
+    public function destroy(Filme $filme)
+    {
+        $oldTitulo = $filme->titulo;
+        try {
+            $filme->delete();
+            return redirect()->route('filmes.lista')
+                ->with('alert-msg', 'Disciplina "' . $filme->titulo . '" foi apagado com sucesso!')
+                ->with('alert-type', 'success');
+        } catch (\Throwable $th) {
+            // $th é a exceção lançada pelo sistema - por norma, erro ocorre no servidor BD MySQL
+            // Descomentar a próxima linha para verificar qual a informação que a exceção tem
+            //dd($th, $th->errorInfo);
+
+            if ($th->errorInfo[1] == 1451) {   // 1451 - MySQL Error number for "Cannot delete or update a parent row: a foreign key constraint fails (%s)"
+                return redirect()->route('admin.disciplinas')
+                    ->with('alert-msg', 'Não foi possível apagar a Filme "' . $oldTitulo . '", porque o filme tem sessões!')
+                    ->with('alert-type', 'danger');
+            } else {
+                return redirect()->route('admin.disciplinas')
+                    ->with('alert-msg', 'Não foi possível apagar o Filme "' . $oldTitulo . '". Erro: ' . $th->errorInfo[2])
+                    ->with('alert-type', 'danger');
+            }
+        }
     }
 
 

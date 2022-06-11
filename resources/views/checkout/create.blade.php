@@ -47,17 +47,7 @@
             </div>
 
             <!-- Text input-->
-            <div class="form-group">
-                <label class="col-md-8 control-label" for="endereco">Endereço</label>
-                <div class="col-md-8">
-                    <input id="endereco" name="endereco" type="text" placeholder="" class="form-control input-md" required="" value="{{old('endereco') ?? Auth::user()->cliente->endereco ?? '' }}">
-                    @error('endereco')
-                    <div class="error">
-                        {{$message}}
-                    </div>
-                    @enderror
-                </div>
-            </div>
+            
             <!-- Select Basic -->
             <div class="form-group">
                 <label class="col-md-8 control-label" for="tipo_pagamento">Tipo de Pagamento</label>
@@ -134,7 +124,7 @@
 
                 <div class="summary-total" >
                 
-                    <div class="font-weight-bold">Total: {{Cart::getTotal()}}€</div>
+                    <div class="font-weight-bold">Total: ({{ App\Http\Controllers\CartController::getPercentagemIVA() }}%): €{{ App\Http\Controllers\CartController::getTotalIVA() }}€</div>
                 </div>
           
             </div> <!-- end checkout-totals -->
