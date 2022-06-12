@@ -4,7 +4,7 @@
     <form method="POST" action="{{route('sala.update', ['sala' => $sala]) }}" class="form-group">
         @csrf
         @method('PUT')
-        @include('SALAS.partials.create-edit')
+        @include('salas.partials.create-edit')
         <div class="form-group text-right">
                 <button type="submit" class="btn btn-success" name="ok">Save</button>
                 <a href="{{route('filme.edit', ['filme' => $filme]) }}" class="btn btn-secondary">Cancel</a>

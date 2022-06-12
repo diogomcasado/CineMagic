@@ -75,10 +75,12 @@ class FilmesController extends Controller
 
     public function create()
     {
+        $generos = Genero::paginate(25);
         $filme = new Filme();
-        // $generos = Genero::pluck('code', 'nome');
+ 
         return view('filmes.create')
-            ->withFilme($filme);
+            ->withFilme($filme)
+            ->withGeneros($generos);;
             
 
     }

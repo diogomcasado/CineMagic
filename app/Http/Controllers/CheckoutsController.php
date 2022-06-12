@@ -13,27 +13,32 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
+use App\Models\Recibo;
+
 use PDF;
 
 class CheckoutsController extends Controller
 {
 
+	
 	public function index()
 	{
+		$recibos = Recibo::where('cliente_id', '=', Auth::user()->id)->paginate(15);
 		$tipo_user = Auth::user()->tipo;
-
-		switch ($tipo_user) {
-			case 'C':
-				$checkouts = Checkout::where('cliente_id', '=', Auth::user()->id)->orderBy('estado', 'desc')->paginate(15);
-				break;
-			case 'F':
-				$checkouts = Checkout::whereIn('estado', ['pendente', 'paga'])->paginate(15);
-				break;
-			case 'A':
-				$checkouts = Checkout::paginate(15);
-				break;
-		}
-		return view('Checkout.list', compact('checkouts'));
+	
+		// switch ($tipo_user) {
+		// 	case 'C':
+		// 		$recibos = Recibo::where('cliente_id', '=', Auth::user()->id);
+		// 		break;
+		// 	case 'F':
+		// 		$recibos = Recibo::paginate(15);
+		// 		break;
+		// 	case 'A':
+		// 		$recibos = Recibo::paginate(15);
+		// 		break;
+		// }
+		
+		return view('Checkout.list')->withRecibos($recibos);
 	}
 
 	// public function store(Request $request)
@@ -164,17 +169,17 @@ class CheckoutsController extends Controller
 	// 	return redirect()->back()->with(['success', "A encomenda #{$encomenda->id} foi atualizada com sucesso!"]);
 	// }
 
-	// public function pdf(Encomenda $encomenda)
-	// {
-	// 	if ($encomenda->recibo_url) {
-	// 		$headers = array(
-	// 			'Content-Type: application/pdf',
-	// 		);
+	public function pdf(Encomenda $encomenda)
+	{
+		if ($recibo->recibo_pdf_url) {
+			$headers = array(
+				'Content-Type: application/pdf',
+			);
 
-	// 		return response()->download(storage_path('app/pdf_recibos/' . $encomenda->recibo_url, 'Fatura' . $encomenda->id . '.pdf', $headers));
-	// 	}
+			return response()->download(storage_path('app/pdf_recibos/' . $recibo->recibo_pdf_url, 'Fatura' . $recibo->id . '.pdf', $headers));
+		}
 
-	// 	abort(404,'Ficheiro não encontrado!');
-	// }
+		abort(404,'Ficheiro não encontrado!');
+	}
 
 }

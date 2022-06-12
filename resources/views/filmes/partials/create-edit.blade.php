@@ -25,8 +25,8 @@
 <div class="form-group">
     <label for="inputGenero">Genero</label>
     <select class="form-control" name="Genero" id="inputGenenro">
-    @foreach ($generos as $abr => $nome)
-           <option value={{$abr}} {{$abr == old('filme', $filme->genero_code) ? 'selected' : ''}}>{{$nome}}</option>
+    @foreach ($generos as $genero)
+           <option value={{$genero}} {{$genero == old('filme', $genero->nome) ? 'selected' : ''}}>{{$genero}}</option>
         @endforeach
     </select>
     @error('genero')

@@ -34,41 +34,41 @@ class SalasController extends Controller
 
     public function list()
     {
-        $salas = Sala::paginate(50);
+        $salas = Sala::paginate(15);
 
-        return view('salas.list', compact('salas'));
+        return view('salas.list')->withSalas($salas);
     }
 
 
     public function create()
     {
-        $sala = new Sala();
-        return view('salas.create')
-            ->withFilme($sala);
+     
             
+        $sala = new Sala();
+        return view('salas.create')->withSala($sala);
 
     }
     public function store(SalaPost $request)
     {
         $newSala = Sala::create($request->validated());
+        $sala->save();
         return redirect()->route('salas')
             ->with('alert-msg', 'Sala "' . $newSala->nome . '" foi criada com sucesso!')
             ->with('alert-type', 'success');
     }
     public function edit(Sala $sala)
     {
-        $salas = Sala::all();
+       
         return view('salas.edit')
-            ->withFilme($sala);
+            ->withSala($sala);
             
     }
     public function update(SalaPost $request, Sala $sala)
     {
-        $validated_data = $request->validated();
-        $nome->fill($validated_data);
-        $nome->save();
-        return redirect()->route('salas.create')
-            ->with('alert-msg', 'Sala "' . $sala->nome . '" foi alterado com sucesso!')
+        $sala->fill($request->validated());
+        $sala->save();
+        return redirect()->route('salas.list')
+            ->with('alert-msg', 'Sala "' . $sala->id . '" foi alterado com sucesso!')
             ->with('alert-type', 'success');
     }
 

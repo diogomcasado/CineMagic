@@ -56,8 +56,10 @@ Route::post('clear', 'App\Http\Controllers\CartController@clear')->name('cart.cl
 
 //checkout
 Route::get('checkout/create','App\Http\Controllers\CheckoutsController@create')->name('checkout.create');
+Route::get('checkout/list','App\Http\Controllers\CheckoutsController@index')->name('checkout.list');
 
-
+//PDF
+Route::get('checkout/pdf/{ckeckout}','App\Http\Controllers\CheckoutsController@create')->name('checkout.pdf');
 
 //sessao
 Route::get('controlo', 'App\Http\Controllers\SessaoController@index')->name('controlo');
