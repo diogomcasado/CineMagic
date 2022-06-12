@@ -71,8 +71,8 @@ class SessaoController extends Controller
     public function edit(Sessao $sessao)
     {
        
-        return view('sessoes.edit')
-            ->withSala($sala);
+        return view('sessao.edit')
+            ->withSessao($sessao);
             
     }
     public function update(SessaoPost $request, Sessao $sessao)

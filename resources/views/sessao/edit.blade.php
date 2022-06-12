@@ -7,7 +7,7 @@
         @include('sessao.partials.create-edit')
         <div class="form-group text-right">
                 <button type="submit" class="btn btn-success" name="ok">Save</button>
-                <a href="{{route('sessao.edit', ['sessao' => $sessao]) }}" class="btn btn-secondary">Cancel</a>
+                <a href="{{route('sessao.list', ['sessao' => $sessao]) }}" class="btn btn-secondary">Cancel</a>
         </div>
     </form>
 @endsection

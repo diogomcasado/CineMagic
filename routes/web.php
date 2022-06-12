@@ -69,6 +69,7 @@ Route::get('Sessao/{sessao}/edit', 'App\Http\Controllers\SessaoController@edit')
 Route::delete('sessao/apagar/{sessao}','App\Http\Controllers\SessaoController@destroy')->middleware(['auth', 'verified'])->name('sessao.destroy');
 Route::get('sessoes/lista/create', 'App\Http\Controllers\SessaoController@create')->name('sessoes.create')->middleware(['auth', 'verified']);
 Route::post('sessoes', 'App\Http\Controllers\SessaoController@store')->name('sessoes.store')->middleware(['auth', 'verified']);
+Route::put('sessao/{sessao}/update', 'App\Http\Controllers\SessaoController@update')->name('sessao.update')->middleware(['auth', 'verified']);
 
 //admin
 Route::get('admin', 'App\Http\Controllers\ConfiguracaoController@index')->middleware(['auth', 'verified'])->name('config');
