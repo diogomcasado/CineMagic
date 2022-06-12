@@ -42,7 +42,8 @@
                             <a href="{{ route('user.list') }}">| Lista Clientes</a>
                             <a href="{{ route('filme.lista') }}">| Lista Filmes</a>
                             <a href="{{ route('sala.list') }}">| Lista Salas</a>
-                            <a >| Lista Sessões</a>
+                            <a href="{{ route('sessao.list') }}">| Lista Sessões</a>
+                            <a >| Estatisticas</a>
                             @endif
                             @if(Auth::user() and Auth::user()->tipo == 'F')
                             <a href="{{ route('controlo') }}">| Controlo de acesso</a>

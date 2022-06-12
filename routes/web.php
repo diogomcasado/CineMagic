@@ -64,6 +64,11 @@ Route::get('checkout/pdf/{ckeckout}','App\Http\Controllers\CheckoutsController@c
 //sessao
 Route::get('controlo', 'App\Http\Controllers\SessaoController@index')->name('controlo');
 Route::get('controlo/get_sessao', 'App\Http\Controllers\SessaoController@get_sessao')->name('controlo.sessao');
+Route::get('sessoes/list', 'App\Http\Controllers\sessaoController@list')->middleware(['auth', 'verified'])->name('sessao.list');
+Route::get('Sessao/{sessao}/edit', 'App\Http\Controllers\SessaoController@edit')->middleware(['auth', 'verified'])->name('sessao.edit');
+Route::delete('sessao/apagar/{sessao}','App\Http\Controllers\SessaoController@destroy')->middleware(['auth', 'verified'])->name('sessao.destroy');
+Route::get('sessoes/lista/create', 'App\Http\Controllers\SessaoController@create')->name('sessoes.create')->middleware(['auth', 'verified']);
+Route::post('sessoes', 'App\Http\Controllers\SessaoController@store')->name('sessoes.store')->middleware(['auth', 'verified']);
 
 //admin
 Route::get('admin', 'App\Http\Controllers\ConfiguracaoController@index')->middleware(['auth', 'verified'])->name('config');
