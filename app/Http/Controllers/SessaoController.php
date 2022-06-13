@@ -63,11 +63,12 @@ class SessaoController extends Controller
     public function store(SessaoPost $request)
     {
         $newSessao = Sessao::create($request->validated());
-        $sessao->save();
+      
         return redirect()->route('sessoes')
             ->with('alert-msg', 'Sessao "' . $newSessao->id . '" foi criada com sucesso!')
             ->with('alert-type', 'success');
     }
+   
     public function edit(Sessao $sessao)
     {
        
@@ -75,11 +76,12 @@ class SessaoController extends Controller
             ->withSessao($sessao);
             
     }
+    
     public function update(SessaoPost $request, Sessao $sessao)
     {
         $sessao->fill($request->validated());
         $sessao->save();
-        return redirect()->route('sessoes.list')
+        return redirect()->route('sessao.list')
             ->with('alert-msg', 'Sessao "' . $sessao->id . '" foi alterado com sucesso!')
             ->with('alert-type', 'success');
     }

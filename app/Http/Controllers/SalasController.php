@@ -51,11 +51,12 @@ class SalasController extends Controller
     public function store(SalaPost $request)
     {
         $newSala = Sala::create($request->validated());
-        $sala->save();
-        return redirect()->route('salas')
+       
+        return redirect()->route('sala.list')
             ->with('alert-msg', 'Sala "' . $newSala->nome . '" foi criada com sucesso!')
             ->with('alert-type', 'success');
-    }
+    
+        }
     public function edit(Sala $sala)
     {
        
@@ -67,34 +68,31 @@ class SalasController extends Controller
     {
         $sala->fill($request->validated());
         $sala->save();
-        return redirect()->route('salas.list')
+        return redirect()->route('sala.list')
             ->with('alert-msg', 'Sala "' . $sala->id . '" foi alterado com sucesso!')
             ->with('alert-type', 'success');
     }
 
     public function destroy(Sala $sala)
-    {
-        $oldNome = $sala->nome;
-        try {
-            $sala->delete();
-            return redirect()->route('salas.lista')
-                ->with('alert-msg', 'Sala "' . $sala->nome . '" foi apagado com sucesso!')
-                ->with('alert-type', 'success');
-        } catch (\Throwable $th) {
-            // $th é a exceção lançada pelo sistema - por norma, erro ocorre no servidor BD MySQL
-            // Descomentar a próxima linha para verificar qual a informação que a exceção tem
-            //dd($th, $th->errorInfo);
-
-            if ($th->errorInfo[1] == 1451) {   // 1451 - MySQL Error number for "Cannot delete or update a parent row: a foreign key constraint fails (%s)"
-                return redirect()->route('salas.list')
-                    ->with('alert-msg', 'Não foi possível apagar a Filme "' . $oldTitulo . '", porque o filme tem sessões!')
-                    ->with('alert-type', 'danger');
-            } else {
-                return redirect()->route('salas.list')
-                    ->with('alert-msg', 'Não foi possível apagar o Filme "' . $oldTitulo . '". Erro: ' . $th->errorInfo[2])
-                    ->with('alert-type', 'danger');
-            }
-        }
-    }
+     {
+         $oldName = $sala->id;
+         try {
+             $sala->delete();
+             return redirect()->route('sala.list')
+                 ->with('alert-msg', 'Sala "' . $oldName . '" foi apagado com sucesso!')
+                 ->with('alert-type', 'success');
+         } catch (\Throwable $th) {
+ 
+             if ($th->errorInfo[1] == 1451) {   // 1451 - MySQL Error number for "Cannot delete or update a parent row: a foreign key constraint fails (%s)"
+                 return redirect()->route('salas')
+                     ->with('alert-msg', 'Não foi possível apagar o Sala "' . $oldName . '", porque este Sala já está em uso!')
+                     ->with('alert-type', 'danger');
+             } else {
+                 return redirect()->route('salas')
+                     ->with('alert-msg', 'Não foi possível apagar o Sala "' . $oldName . '". Erro: ' . $th->errorInfo[2])
+                     ->with('alert-type', 'danger');
+             }
+         }
+     }
 
 }

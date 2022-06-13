@@ -23,13 +23,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('filmes', 'App\Http\Controllers\FilmesController@index')->name('filmes.list');
 Route::get('filme/{id}', 'App\Http\Controllers\FilmesController@detalhes');
 Route::get('filmes/lista', 'App\Http\Controllers\filmesController@list')->middleware(['auth', 'verified'])->name('filme.lista');
-// Route::get('profile', 'App\Http\Controllers\filmesController@index2')->middleware(['auth', 'verified'])->name('filme.profile');
-Route::put('filmes/{filme}/update', 'App\Http\Controllers\filmesController@update')->name('filme.update')->middleware(['auth', 'verified']);
 Route::get('filme/{filme}/edit', 'App\Http\Controllers\filmesController@edit')->middleware(['auth', 'verified'])->name('filme.edit');
 Route::delete('filme/apagar/{filme}','App\Http\Controllers\filmesController@destroy')->middleware(['auth', 'verified'])->name('filme.destroy');
-
 Route::get('filmes/lista/create', 'App\Http\Controllers\filmesController@create')->name('filmes.create')->middleware(['auth', 'verified']);
-Route::post('filmes', 'App\Http\Controllers\filmesController@store')->name('filmes.store')->middleware(['auth', 'verified']);
+Route::post('filmes', 'App\Http\Controllers\filmesController@store')->middleware(['auth', 'verified'])->name('filmes.store');
+Route::put('fiilme/{filme}/update', 'App\Http\Controllers\filmesController@update')->name('filme.update')->middleware(['auth', 'verified']);
 
 
 //users
@@ -56,6 +54,9 @@ Route::post('clear', 'App\Http\Controllers\CartController@clear')->name('cart.cl
 
 //checkout
 Route::get('checkout/create','App\Http\Controllers\CheckoutsController@create')->name('checkout.create');
+
+//historico
+Route::get('bilhetes/list','App\Http\Controllers\BilhetesController@list')->name('historico.listB');
 Route::get('checkout/list','App\Http\Controllers\CheckoutsController@index')->name('checkout.list');
 
 //PDF

@@ -77,37 +77,40 @@ class FilmesController extends Controller
     {
         $generos = Genero::paginate(25);
         $filme = new Filme();
- 
         return view('filmes.create')
             ->withFilme($filme)
-            ->withGeneros($generos);;
+            ->withGeneros($generos);
             
 
     }
     public function store(FilmePost $request)
     {
         $newFilme = Filme::create($request->validated());
-        return redirect()->route('filmes')
+       
+        return redirect()->route('filme.list')
             ->with('alert-msg', 'Filme "' . $newFilme->titulo . '" foi criada com sucesso!')
             ->with('alert-type', 'success');
-    }
-    public function edit(Filme $filme)
-    {
-        $filmes = Filme::all();
-        return view('filmes.edit')
-            ->withFilme($filme);
-            
-    }
-    public function update(FilmePost $request, Filme $filme)
-    {
-        $validated_data = $request->validated();
-        $titulo->fill($validated_data);
-        $titulo->save();
-        return redirect()->route('filmes.create')
-            ->with('alert-msg', 'Filme "' . $filme->titulo . '" foi alterado com sucesso!')
-            ->with('alert-type', 'success');
-    }
+    
+        }
+    Public function edit(Filme $filme)
+        {
+            $generos = Genero::paginate(25);
+            return view('filmes.edit')
+                ->withFilme($filme)
+                ->withGeneros($generos);
+        }    
+    
+  
 
+    public function update(FilmePost $request, Filme $filme)
+        {
+            $filme->fill($request->validated());
+            $filme->save();
+            return redirect()->route('filmes.lista')
+                ->with('alert-msg', 'Filme "' . $filme->id . '" foi alterado com sucesso!')
+                ->with('alert-type', 'success');
+        }
+    
     public function destroy(Filme $filme)
     {
         $oldTitulo = $filme->titulo;

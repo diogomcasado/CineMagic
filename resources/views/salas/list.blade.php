@@ -30,7 +30,7 @@
                    
               
                 <td>
-                    <form method="GET" action=""
+                    <form method="GET" action="{{ route('sala.edit', ['sala' => $sala->id]) }}"
                         style="display: inline">
                         @csrf
                         <input type="hidden" name="_method" value="get">

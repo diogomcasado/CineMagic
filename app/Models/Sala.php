@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Sala extends Model
 {
     use HasFactory;
+    public $timestamps=false;
     protected $fillable=['nome'];
 
     public function sessao()

@@ -25,6 +25,7 @@ class SalaPost extends FormRequest
     {
          return  [
              'nome' =>       'required'
+             
             
          ];
     }

@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use App\Models\Recibo;
-
+use App\Services\Payment;
 use PDF;
 
 class CheckoutsController extends Controller
@@ -135,12 +135,12 @@ class CheckoutsController extends Controller
 	// 	}
 	// 	return redirect()->back()->withErrors(['error', "Erro na Encomenda!"]);
 	// }
-	
 
 	public function create()
 	{
 		return view('checkout.create');
 	}
+
 
 	// public function update(Request $request, Encomenda $encomenda)
 	// {
@@ -169,7 +169,7 @@ class CheckoutsController extends Controller
 	// 	return redirect()->back()->with(['success', "A encomenda #{$encomenda->id} foi atualizada com sucesso!"]);
 	// }
 
-	public function pdf(Encomenda $encomenda)
+	public function pdf(Recibo $recibo)
 	{
 		if ($recibo->recibo_pdf_url) {
 			$headers = array(

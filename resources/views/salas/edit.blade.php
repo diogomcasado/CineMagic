@@ -7,7 +7,7 @@
         @include('salas.partials.create-edit')
         <div class="form-group text-right">
                 <button type="submit" class="btn btn-success" name="ok">Save</button>
-                <a href="{{route('filme.edit', ['filme' => $filme]) }}" class="btn btn-secondary">Cancel</a>
+                <a href="{{route('sala.list', ['sala' => $sala]) }}" class="btn btn-secondary">Cancel</a>
         </div>
     </form>
 @endsection
