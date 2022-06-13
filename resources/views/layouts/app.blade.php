@@ -84,15 +84,9 @@
                                 @if(Auth::user() and Auth::user()->tipo == 'A')
                                 <a class="dropdown-item" href="{{ route('config') }}" >Administração </a>
                                 @endif
-                                
                                 @if(Auth::user() and Auth::user()->tipo == 'C')
-                                <a  href="{{ route('checkout.list') }}" >| Historico </a>
+                                <a  class="dropdown-item" href="{{ route('checkout.list') }}" >Historico </a>
                                 @endif
-                                
-                                @if(Auth::user() and Auth::user()->tipo == 'C')
-                                <a  href="{{ route('checkout.list') }}" >| Historico </a>
-                                @endif
-                                
                                 @if(Auth::user() and Auth::user()->tipo != 'F')
                                 <a class="dropdown-item" href="{{ route('user.edit') }}">Perfil</a>
                                 @endif
