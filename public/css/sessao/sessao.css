@@ -1,0 +1,26 @@
+.main{
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+.btn {
+    margin-top: 10px;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+.form-label {
+    margin-top: 12px;
+    margin-bottom: 0px;
+}
+
+.alert {
+    margin-left: 30%;
+    margin-right: 30%;
+    text-align: center;
+}
+
+.input {
+    width: 100px;
+}
+

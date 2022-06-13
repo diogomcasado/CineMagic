@@ -12,7 +12,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
+    
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -42,7 +42,11 @@
                             <a href="{{ route('user.list') }}">| Lista Clientes</a>
                             <a href="{{ route('filme.lista') }}">| Lista Filmes</a>
                             <a href="{{ route('sala.list') }}">| Lista Salas</a>
-                            <a >| Lista Sessões</a>
+                            <a href="{{ route('sessao.list') }}">| Lista Sessões</a>
+                            <a >| Estatisticas</a>
+                            @endif
+                            @if(Auth::user() and Auth::user()->tipo == 'F')
+                            <a href="{{ route('controlo') }}">| Controlo de acesso</a>
                             @endif
                         </div>
 
@@ -53,6 +57,7 @@
                         <!-- Authentication Links -->
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('cart.list') }}">Carrinho {{ Cart::getTotalQuantity()}}</a>
+                       
                         </li>
                         @guest
                         @if (Route::has('login'))
@@ -75,19 +80,23 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                
                                 @if(Auth::user() and Auth::user()->tipo == 'A')
-<<<<<<< Updated upstream
-                                <a class="dropdown-item" href="{{ route('config') }}">Configurações</a>
-=======
                                 <a class="dropdown-item" href="{{ route('config') }}" >Administração </a>
                                 @endif
+                                
                                 @if(Auth::user() and Auth::user()->tipo == 'C')
                                 <a  href="{{ route('checkout.list') }}" >| Historico </a>
->>>>>>> Stashed changes
                                 @endif
-
+                                
+                                @if(Auth::user() and Auth::user()->tipo == 'C')
+                                <a  href="{{ route('checkout.list') }}" >| Historico </a>
+                                @endif
+                                
+                                @if(Auth::user() and Auth::user()->tipo != 'F')
                                 <a class="dropdown-item" href="{{ route('user.edit') }}">Perfil</a>
-
+                                @endif
+                                
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
@@ -101,6 +110,7 @@
                         @endguest
                     </ul>
                 </div>
+                
             </div>
         </nav>
 

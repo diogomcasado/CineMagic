@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Filme extends Model
 {
     use HasFactory;
-
+    protected $fillable = [
+         'titulo','sumario',"genero_code","url_code"
+    ];
     public function sessao()
     {
         return $this->hasMany("App\Models\Sessao");

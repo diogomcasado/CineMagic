@@ -9,6 +9,7 @@
     <table class="table table-bordered table-striped table-sm">
         <thead>
             <tr>
+                <th></th>
                 <th>#</th>
                 <th>Nome</th>
                 <th>Email</th>
@@ -20,6 +21,10 @@
         <tbody>
             @forelse($users as $user)
             <tr>
+                <td>
+                <img src="{{$user->foto_url ? asset('storage/fotos/' . $user->foto_url) : asset('img/default_img.png') }}" 
+                alt="Foto do aluno"  class="img-profile rounded-circle" style="width:40px;height:40px">
+                </td>
                 <td>{{ $user->id }}</td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
