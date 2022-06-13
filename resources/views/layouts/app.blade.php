@@ -82,11 +82,17 @@
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 
                                 @if(Auth::user() and Auth::user()->tipo == 'A')
-                                <a   >| Estatisticas</a>
+                                <a class="dropdown-item" href="{{ route('config') }}" >Administração </a>
                                 @endif
+                                
                                 @if(Auth::user() and Auth::user()->tipo == 'C')
                                 <a  href="{{ route('checkout.list') }}" >| Historico </a>
                                 @endif
+                                
+                                @if(Auth::user() and Auth::user()->tipo == 'C')
+                                <a  href="{{ route('checkout.list') }}" >| Historico </a>
+                                @endif
+                                
                                 @if(Auth::user() and Auth::user()->tipo != 'F')
                                 <a class="dropdown-item" href="{{ route('user.edit') }}">Perfil</a>
                                 @endif

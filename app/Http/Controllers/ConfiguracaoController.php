@@ -14,6 +14,8 @@ class ConfiguracaoController extends Controller
         $config = Configuracao::findOrFail(1);
         //dd($config);
 
+        $user = User::findOrFail(Auth::id());
+
         if($user->tipo == 'F' || $user->tipo == 'C'){
             return abort(403, 'Unauthorized action.');
         }
