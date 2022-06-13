@@ -29,19 +29,15 @@ class SessaoController extends Controller
         return view('sessao.controlo', compact('filmesListFinal'));
     }
 
-    public function get_sessao(Request $request)
+    public function get_sessao($id)
     {
-        if (!$request->filme) {
-            $html = '<option value="">'.trans('global.pleaseSelect').'</option>';
-        } else {
-            $html = '';
-            $sessoes = Sessao::where('filme_id', $request->filme_id)->get();
-            foreach ($sessoes as $sessao) {
-                $html .= '<option value="'.$sessao->id.'">'.$sessao->name.'</option>';
-            }
-        }
-    
-        return response()->json(['html' => $html]);
+        //$sessoes = Sessao::where('filme_id', $id)->pluck("data","id");
+
+        $sessoes = Sessao::where('filme_id', $id)->where('data', '>', Carbon::now()->toDateString())->pluck("data","id");
+
+        //dd($sessoes);
+        return json_encode($sessoes);
+        
     }
 
 
