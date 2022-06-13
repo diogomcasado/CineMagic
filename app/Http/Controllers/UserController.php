@@ -53,6 +53,23 @@ class UserController extends Controller
 
     public function edit(Request $request)
     {
+        $request->validate([
+            'name' => 'required|max:99|min:1',
+            'nif' => 'required|numeric|between:100000000,999999999',
+            'email' => 'email:rfc,dns',
+            'photo' => 'image',
+            
+        ],
+        [
+        'name.required'  => 'Nome obrigatório',
+        'name.max'       => 'Nome deve ter no maximo 99 carateres',
+        'name.min'       => 'Nome no minimo 1 carater',
+        'nif.required'  => 'NIF obrigatório',
+        'nif.between'   => 'NIF inválido',
+        'nif.numric'    => 'NIF inválido',
+        ]
+        );
+
         $name =     $request->input('name');
         $email =    $request->input('email');
         $photo =    $request->input('photo');
@@ -89,6 +106,8 @@ class UserController extends Controller
             $user = User::findOrFail($id);
             $user->update($request->except('_token', '_method'));
         }
+
+        session()->flash('success', 'Valores editados com sucesso!');
 
         return redirect('/profile');
     

@@ -5,6 +5,23 @@
 
 
 @section('content')
+
+@if ($message = Session::get('success'))
+
+<p class="alert alert-success">{{ $message }}</p>
+
+@endif
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <h1>User Profile Page</h1>
 <div class="main">
     <form action="{{ route('user.edit') }}" method="POST" enctype="multipart/form-data">
