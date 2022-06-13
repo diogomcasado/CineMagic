@@ -63,7 +63,8 @@ Route::get('checkout/pdf/{ckeckout}','App\Http\Controllers\CheckoutsController@c
 
 //sessao
 Route::get('controlo', 'App\Http\Controllers\SessaoController@index')->name('controlo');
-Route::get('controlo/get_sessao', 'App\Http\Controllers\SessaoController@get_sessao')->name('controlo.sessao');
+Route::get('controlo/get_sessao/{id}', 'App\Http\Controllers\SessaoController@get_sessao')->name('controlo.sessao');
+
 Route::get('sessoes/list', 'App\Http\Controllers\sessaoController@list')->middleware(['auth', 'verified'])->name('sessao.list');
 Route::get('Sessao/{sessao}/edit', 'App\Http\Controllers\SessaoController@edit')->middleware(['auth', 'verified'])->name('sessao.edit');
 Route::delete('sessao/apagar/{sessao}','App\Http\Controllers\SessaoController@destroy')->middleware(['auth', 'verified'])->name('sessao.destroy');
