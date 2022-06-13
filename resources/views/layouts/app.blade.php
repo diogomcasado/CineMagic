@@ -76,7 +76,14 @@
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 @if(Auth::user() and Auth::user()->tipo == 'A')
+<<<<<<< Updated upstream
                                 <a class="dropdown-item" href="{{ route('config') }}">Configurações</a>
+=======
+                                <a class="dropdown-item" href="{{ route('config') }}" >Administração </a>
+                                @endif
+                                @if(Auth::user() and Auth::user()->tipo == 'C')
+                                <a  href="{{ route('checkout.list') }}" >| Historico </a>
+>>>>>>> Stashed changes
                                 @endif
 
                                 <a class="dropdown-item" href="{{ route('user.edit') }}">Perfil</a>
