@@ -13,6 +13,20 @@
                   
                 </select>
             </div>
+            <form id="form_search" action="{{route('filmes.list')}}" method="GET">
+        <div class="input-group justify-content-center">
+            <div class="form-outline">
+                <input value="{{old('inputsearch')}}" name="inputsearch" id="input_search" type="search"
+                    class="form-control" />
+            </div>
+           
+            <button id="btn_search" type="submit" class="btn btn-secondary">
+                <i class="fas fa-search"></i>
+            </button>
+
+        </div>
+
+    </form>
     <div class="filmes-list">
         @foreach ($filmesListFinal as $filmes => $filme)
         <span class="filme">

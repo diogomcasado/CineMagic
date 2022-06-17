@@ -25,7 +25,8 @@ class SessaoController extends Controller
         })->get();
 
         // dd($filmesListFinal);
-
+ 
+      
         return view('sessao.controlo', compact('filmesListFinal'));
     }
 
@@ -46,7 +47,7 @@ class SessaoController extends Controller
         $sessoes = Sessao::paginate(25);
 
 
-        return view('sessao.list')->withSessoes($sessoes);;
+        return view('sessao.list')->withSessoes($sessoes);
     }
     public function create()
     {
@@ -60,11 +61,11 @@ class SessaoController extends Controller
     {
         $newSessao = Sessao::create($request->validated());
       
-        return redirect()->route('sessoes')
+        return redirect()->route('sessoes.list')
             ->with('alert-msg', 'Sessao "' . $newSessao->id . '" foi criada com sucesso!')
             ->with('alert-type', 'success');
     }
-   
+    
     public function edit(Sessao $sessao)
     {
        
@@ -82,5 +83,8 @@ class SessaoController extends Controller
             ->with('alert-type', 'success');
     }
 
-   
+    
 }
+
+       
+    

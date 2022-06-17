@@ -41,100 +41,100 @@ class CheckoutsController extends Controller
 		return view('Checkout.list')->withRecibos($recibos);
 	}
 
-	// public function store(Request $request)
-	// {
+	public function store(Request $request)
+	{
 
-	// 	$rules = [
-	// 		'nif' => 'required|digits:9',
-	// 		'endereco' => 'required|string',
-	// 		'tipo_pagamento' => ['required', Rule::in(['MC', 'PAYPAL', 'VISA'])],
-	// 		'ref_pagamento' => ['required', $request->tipo_pagamento == 'PAYPAL' ? 'email' : 'digits:16'],
-	// 		'notas' => 'sometimes',
-	// 	];
+		$rules = [
+			'nif' => 'required|digits:9',
+			'endereco' => 'required|string',
+			'tipo_pagamento' => ['required', Rule::in(['MC', 'PAYPAL', 'VISA'])],
+			'ref_pagamento' => ['required', $request->tipo_pagamento == 'PAYPAL' ? 'email' : 'digits:16'],
+			'notas' => 'sometimes',
+		];
 
-	// 	$messages = [
-	// 		'nif.required' => 'Nif Obrigatório',
-	// 		'nif.digits' => 'O nif tem que ter 9 digitos',
-	// 		'endereco.required' => 'Endereço Obrigatório',
-	// 		'tipo_pagamento.required' => 'Tipo pagamento obrigatório',
-	// 		'tipo_pagamento.in' => 'Tipo de pagamento Invalido',
-	// 		'ref_pagamento.email'	=> 'Email da Ref.Pagamento Invalido',
-	// 		'ref_pagamento.digits' => 'Ref.Pagamento Invalida',
-	// 	];
+		$messages = [
+			'nif.required' => 'Nif Obrigatório',
+			'nif.digits' => 'O nif tem que ter 9 digitos',
+			'endereco.required' => 'Endereço Obrigatório',
+			'tipo_pagamento.required' => 'Tipo pagamento obrigatório',
+			'tipo_pagamento.in' => 'Tipo de pagamento Invalido',
+			'ref_pagamento.email'	=> 'Email da Ref.Pagamento Invalido',
+			'ref_pagamento.digits' => 'Ref.Pagamento Invalida',
+		];
 
-	// 	$input =  $request->validate($rules, $messages);
+		$input =  $request->validate($rules, $messages);
 
-	// 	$input['estado'] = 'pendente';
-	// 	$input['cliente_id'] = Auth::user()->cliente->id;
-	// 	$input['data'] = date('Y-m-d');
+	
+		$input['cliente_id'] = Auth::user()->cliente->id;
+		$input['data'] = date('Y-m-d');
 
-	// 	$cart_items = Cart::content();
-	// 	$precos = Preco::all()->first();
-	// 	$preco_total = 0;
+		// $cart_items = Cart::content();
+		// $precos = Preco::all()->first();
+		// $preco_total = 0;
 
-	// 	foreach ($cart_items as $item) {
-	// 		if ($item->model->cliente_id) {
-	// 			if ($item->qty >= $precos->quantidade_desconto) {
-	// 				$preco_un = $precos->preco_un_proprio_desconto;
-	// 			} else {
-	// 				$preco_un = $precos->preco_un_proprio;
-	// 			}
-	// 		} else {
-	// 			if ($item->qty >= $precos->quantidade_desconto) {
-	// 				$preco_un = $precos->preco_un_catalogo_desconto;
-	// 			} else {
-	// 				$preco_un = $precos->preco_un_catalogo;
-	// 			}
-	// 		}
-	// 		$preco_total += $preco_un;
-	// 	}
-	// 	$input['preco_total'] = $preco_total * 1.23;
-	// 	$encomenda = Encomenda::create($input);
+		// foreach ($cart_items as $item) {
+		// 	if ($item->model->cliente_id) {
+		// 		if ($item->qty >= $precos->quantidade_desconto) {
+		// 			$preco_un = $precos->preco_un_proprio_desconto;
+		// 		} else {
+		// 			$preco_un = $precos->preco_un_proprio;
+		// 		}
+		// 	} else {
+		// 		if ($item->qty >= $precos->quantidade_desconto) {
+		// 			$preco_un = $precos->preco_un_catalogo_desconto;
+		// 		} else {
+		// 			$preco_un = $precos->preco_un_catalogo;
+		// 		}
+		// 	}
+		// 	$preco_total += $preco_un;
+		// }
+		// $input['preco_total'] = $preco_total * 1.23;
+		// $recibo = Recibo::create($input);
 
-	// 	foreach ($cart_items as $item) {
-	// 		if ($item->model->cliente_id) {
-	// 			if ($item->qty >= $precos->quantidade_desconto) {
-	// 				$preco_un = $precos->preco_un_proprio_desconto;
-	// 			} else {
-	// 				$preco_un = $precos->preco_un_proprio;
-	// 			}
+		// foreach ($cart_items as $item) {
+		// 	if ($item->model->cliente_id) {
+		// 		if ($item->qty >= $precos->quantidade_desconto) {
+		// 			$preco_un = $precos->preco_un_proprio_desconto;
+		// 		} else {
+		// 			$preco_un = $precos->preco_un_proprio;
+		// 		}
 				
-	// 			Tshirt::create([
-	// 				'encomenda_id' => $encomenda->id,
-	// 				'estampa_id' => $item->model->id,
-	// 				'cor_codigo' => $item->options['cor']->codigo,
-	// 				'tamanho' => $item->options['tamanho'],
-	// 				'quantidade' => $item->qty,
-	// 				'preco_un' => $preco_un,
-	// 				'subtotal' => $item->qty * $preco_un,
-	// 			]);
-	// 		} else {
-	// 			if ($item->qty >= $precos->quantidade_desconto) {
-	// 				$preco_un = $precos->preco_un_catalogo_desconto;
-	// 			} else {
-	// 				$preco_un = $precos->preco_un_catalogo;
-	// 			}
+		// 		Filme::create([
+		// 			'filme_id' => $filme->id,
+		// 			'estampa_id' => $item->model->id,
+		// 			'cor_codigo' => $item->options['cor']->codigo,
+		// 			'tamanho' => $item->options['tamanho'],
+		// 			'quantidade' => $item->qty,
+		// 			'preco_un' => $preco_un,
+		// 			'subtotal' => $item->qty * $preco_un,
+		// 		]);
+		// 	} else {
+		// 		if ($item->qty >= $precos->quantidade_desconto) {
+		// 			$preco_un = $precos->preco_un_catalogo_desconto;
+		// 		} else {
+		// 			$preco_un = $precos->preco_un_catalogo;
+		// 		}
 
-	// 			Tshirt::create([
-	// 				'encomenda_id' => $encomenda->id,
-	// 				'estampa_id' => $item->model->id,
-	// 				'cor_codigo' => $item->options['cor']->codigo,
-	// 				'tamanho' => $item->options['tamanho'],
-	// 				'quantidade' => $item->qty,
-	// 				'preco_un' => $preco_un,
-	// 				'subtotal' => $item->qty * $preco_un,
-	// 			]);
-	// 		}
-	// 	}
+		// 		Tshirt::create([
+		// 			'encomenda_id' => $encomenda->id,
+		// 			'estampa_id' => $item->model->id,
+		// 			'cor_codigo' => $item->options['cor']->codigo,
+		// 			'tamanho' => $item->options['tamanho'],
+		// 			'quantidade' => $item->qty,
+		// 			'preco_un' => $preco_un,
+		// 			'subtotal' => $item->qty * $preco_un,
+		// 		]);
+		// 	}
+		// }
 
-	// 	if ($encomenda) {
-	// 		Session::flash('success', "A encomenda #{$encomenda->id} foi criada com sucesso!");
-	// 		Cart::destroy();
-	// 		Mail::to(Auth::user()->email)->send(new NotificarPendente($encomenda));
-	// 		return redirect()->route('estampas.list');
-	// 	}
-	// 	return redirect()->back()->withErrors(['error', "Erro na Encomenda!"]);
-	// }
+		if ($recibo) {
+			Session::flash('success', "A encomenda #{$recibo->id} foi criada com sucesso!");
+			Cart::destroy();
+			Mail::to(Auth::user()->email)->send(new NotificarPendente($recibo));
+			return redirect()->route('estampas.list');
+		}
+		return redirect()->back()->withErrors(['error', "Erro na compra!"]);
+	}
 
 	public function create()
 	{

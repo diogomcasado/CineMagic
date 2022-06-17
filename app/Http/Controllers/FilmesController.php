@@ -23,8 +23,24 @@ class FilmesController extends Controller
         $filmesListFinal = Filme::whereHas('sessao', function($query){
             $query->where('data', '>', Carbon::now()->toDateString());
         })->simplePaginate(12);
+        $privada = false;
+        $generos = Genero::all();
 
-        return view('filmes.list', compact('filmesListFinal'));
+        // if ($request->inputsearch) {
+
+        //     $titulo = [];
+
+        //     $filmesListFinal = Filme::where('titulo', 'like', '%' . $request->inputsearch . '%')->get('id');
+        //     foreach ($filmesListFinal as $filme) {
+        //         array_push($titulo, strval($filme->id));
+        //     }
+
+        //     $filmesListFinal->where('titulo', 'like', '%' . $request->inputsearch . '%')
+        //         ->Where('descricao', 'like', '%' . $request->inputsearch . '%')
+        //         ->WhereIn('titulo', $titulo);
+        // }
+
+        return view('filmes.list', compact('filmesListFinal','privada','generos'));
 
     }
 
