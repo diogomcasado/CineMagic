@@ -43,13 +43,12 @@
                             <a href="{{ route('filme.lista') }}">| Lista Filmes</a>
                             <a href="{{ route('sala.list') }}">| Lista Salas</a>
                             <a href="{{ route('sessao.list') }}">| Lista Sessões</a>
-                            <a >| Estatisticas</a>
+                            <a href="{{ route('estatisticas.index') }}">| Estatisticas| </a>
                             @endif
                             @if(Auth::user() and Auth::user()->tipo == 'F')
-                            <a href="{{ route('controlo') }}">| Controlo de acesso</a>
+                            <a href="{{ route('controlo') }}">Controlo de acesso</a>
                             @endif
                         </div>
-
                     </ul>
 
                     <!-- Right Side Of Navbar -->

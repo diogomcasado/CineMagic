@@ -25,9 +25,9 @@ Route::get('filme/{id}', 'App\Http\Controllers\FilmesController@detalhes');
 Route::get('filmes/lista', 'App\Http\Controllers\filmesController@list')->middleware(['auth', 'verified'])->name('filme.lista');
 Route::get('filme/{filme}/edit', 'App\Http\Controllers\filmesController@edit')->middleware(['auth', 'verified'])->name('filme.edit');
 Route::delete('filme/apagar/{filme}','App\Http\Controllers\filmesController@destroy')->middleware(['auth', 'verified'])->name('filme.destroy');
-Route::get('filmes/lista/create', 'App\Http\Controllers\filmesController@create')->name('filmes.create')->middleware(['auth', 'verified']);
+Route::get('filmes/lista/create', 'App\Http\Controllers\filmesController@create')->middleware(['auth', 'verified'])->name('filmes.create');
 Route::post('filmes', 'App\Http\Controllers\filmesController@store')->middleware(['auth', 'verified'])->name('filmes.store');
-Route::put('fiilme/{filme}/update', 'App\Http\Controllers\filmesController@update')->name('filme.update')->middleware(['auth', 'verified']);
+Route::put('filme/{filme}/update', 'App\Http\Controllers\filmesController@update')->middleware(['auth', 'verified'])->name('filme.update');
 
 
 //users
@@ -36,14 +36,18 @@ Route::get('profile', 'App\Http\Controllers\UserController@index')->middleware([
 Route::post('profile', 'App\Http\Controllers\UserController@edit')->middleware(['auth', 'verified'])->name('user.edit');
 Route::patch('user/bloquear/{user}','App\Http\Controllers\UserController@bloquear')->middleware(['auth', 'verified'])->name('user.bloquear');
 Route::delete('user/apagar/{user}','App\Http\Controllers\UserController@destroy')->middleware(['auth', 'verified'])->name('user.destroy');
+
+
  
+
+
 //Salas
 Route::get('salas/list', 'App\Http\Controllers\salasController@list')->middleware(['auth', 'verified'])->name('sala.list');
-Route::put('salas/{sala}/update', 'App\Http\Controllers\salasController@update')->name('sala.update')->middleware(['auth', 'verified']);
+Route::put('salas/{sala}/update', 'App\Http\Controllers\salasController@update')->middleware(['auth', 'verified'])->name('sala.update');
 Route::get('sala/{sala}/edit', 'App\Http\Controllers\salasController@edit')->middleware(['auth', 'verified'])->name('sala.edit');
 Route::delete('sala/apagar/{sala}','App\Http\Controllers\salasController@destroy')->middleware(['auth', 'verified'])->name('sala.destroy');
-Route::get('salas/lista/create', 'App\Http\Controllers\salasController@create')->name('salas.create')->middleware(['auth', 'verified']);
-Route::post('salas', 'App\Http\Controllers\salasController@store')->name('salas.store')->middleware(['auth', 'verified']);
+Route::get('salas/lista/create', 'App\Http\Controllers\salasController@create')->middleware(['auth', 'verified'])->name('salas.create');
+Route::post('salas', 'App\Http\Controllers\salasController@store')->middleware(['auth', 'verified'])->name('salas.store');
 
 //cart
 Route::post('update-cart', 'App\Http\Controllers\CartController@updateCart')->name('cart.update');
@@ -77,6 +81,9 @@ Route::put('sessao/{sessao}/update', 'App\Http\Controllers\SessaoController@upda
 Route::get('admin', 'App\Http\Controllers\ConfiguracaoController@index')->middleware(['auth', 'verified'])->name('config');
 Route::post('admin', 'App\Http\Controllers\ConfiguracaoController@edit')->middleware(['auth', 'verified'])->name('config.edit');
 
+
+//Estatisticas
+Route::get('estatisticas','App\Http\Controllers\EstatisticasController@index')->middleware(['auth', 'verified'])->name('estatisticas.index');
 
 Auth::routes(['verify' => true]);
 

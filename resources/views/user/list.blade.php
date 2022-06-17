@@ -6,6 +6,7 @@
 <h1>Listagem de Clientes</h1>
 <hr>
 <div class="container">
+<a  class="btn btn-success" role="button" aria-pressed="true">Adicionar Cliente</a>
     <table class="table table-bordered table-striped table-sm">
         <thead>
             <tr>

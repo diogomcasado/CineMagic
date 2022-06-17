@@ -87,19 +87,19 @@ class FilmesController extends Controller
     {
         $newFilme = Filme::create($request->validated());
        
-        return redirect()->route('filme.list')
-            ->with('alert-msg', 'Filme "' . $newFilme->titulo . '" foi criada com sucesso!')
+        return redirect()->route('filmes.lista')
+            ->with('alert-msg', 'Filme "' . $newFilme->id . '" foi criada com sucesso!')
             ->with('alert-type', 'success');
     
         }
     Public function edit(Filme $filme)
         {
-            $generos = Genero::paginate(25);
+            $generos = Genero::all();
             return view('filmes.edit')
                 ->withFilme($filme)
                 ->withGeneros($generos);
         }    
-    
+       
   
 
     public function update(FilmePost $request, Filme $filme)
@@ -110,6 +110,7 @@ class FilmesController extends Controller
                 ->with('alert-msg', 'Filme "' . $filme->id . '" foi alterado com sucesso!')
                 ->with('alert-type', 'success');
         }
+      
     
     public function destroy(Filme $filme)
     {

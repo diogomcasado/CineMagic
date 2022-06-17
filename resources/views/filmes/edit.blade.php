@@ -7,7 +7,7 @@
         @include('filmes.partials.create-edit')
         <div class="form-group text-right">
                 <button type="submit" class="btn btn-success" name="ok">Save</button>
-                <a href="{{route('filmes.list', ['filme' => $filme]) }}" class="btn btn-secondary">Cancel</a>
+                <a href="{{route('filme.lista', ['filme' => $filme]) }}" class="btn btn-secondary">Cancel</a>
         </div>
     </form>
 @endsection
