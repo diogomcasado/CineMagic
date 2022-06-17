@@ -36,7 +36,11 @@ Route::get('profile', 'App\Http\Controllers\UserController@index')->middleware([
 Route::post('profile', 'App\Http\Controllers\UserController@edit')->middleware(['auth', 'verified'])->name('user.edit');
 Route::patch('user/bloquear/{user}','App\Http\Controllers\UserController@bloquear')->middleware(['auth', 'verified'])->name('user.bloquear');
 Route::delete('user/apagar/{user}','App\Http\Controllers\UserController@destroy')->middleware(['auth', 'verified'])->name('user.destroy');
-
+##
+Route::put('users/{user}/update', 'App\Http\Controllers\userController@update')->middleware(['auth', 'verified'])->name('user.update');
+Route::get('user/{user}/edit', 'App\Http\Controllers\userController@edit2')->middleware(['auth', 'verified'])->name('user.edit2');
+Route::get('user/user/create', 'App\Http\Controllers\userController@create')->middleware(['auth', 'verified'])->name('user.create');
+Route::post('users', 'App\Http\Controllers\userController@store')->middleware(['auth', 'verified'])->name('user.store');
 
  
 

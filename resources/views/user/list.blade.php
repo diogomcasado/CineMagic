@@ -6,7 +6,7 @@
 <h1>Listagem de Clientes</h1>
 <hr>
 <div class="container">
-<a  class="btn btn-success" role="button" aria-pressed="true">Adicionar Cliente</a>
+<a   href="{{route('user.create')}}"  class="btn btn-success" role="button" aria-pressed="true">Adicionar Cliente</a>
     <table class="table table-bordered table-striped table-sm">
         <thead>
             <tr>
@@ -50,7 +50,7 @@
                 </td>
                 @if($user->tipo != 'C')
                 <td>
-                    <form method="GET" action=""
+                    <form method="GET" action="{{ route('user.edit2', ['user' => $user->id]) }}"
                         style="display: inline">
                         @csrf
                         <input type="hidden" name="_method" value="get">
@@ -58,6 +58,7 @@
                     </form>
                 @endif
                 </td>
+                
             </tr>
             @empty
             <tr>

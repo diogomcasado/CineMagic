@@ -1,12 +1,12 @@
 @extends('layouts.app')
-@section('title', 'Nova Sala' )
+@section('title', 'Novo User' )
 @section('content')
-    <form method="POST" action="{{route('salas.store')}}" class="form-group">
+    <form method="POST" action="{{route('user.store')}}" class="form-group">
         @csrf
-        @include('salas.partials.create-edit')
+        @include('user.partials.create-edit')
         <div class="form-group text-right">
                 <button type="submit" class="btn btn-success" name="ok">Save</button>
-                <a href="{{route('sala.list')}}" class="btn btn-secondary">Cancel</a>
+                <a href="{{route('user.list')}}" class="btn btn-secondary">Cancel</a>
         </div>
     </form>
 @endsection

@@ -16,6 +16,8 @@ class User extends Authenticatable implements MustVerifyEmail
     public function cliente(){
         return $this->hasOne('App\Models\Cliente','id');
     }
+    public $timestamps=false;
+  
     /**
      * The attributes that are mass assignable.
      *

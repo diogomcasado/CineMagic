@@ -7,6 +7,9 @@ use App\Models\User;
 use App\Models\Cliente;
 use Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Sala;
+use App\Http\Requests\SalaPost;
+use App\Http\Requests\UserPost;
 
 class UserController extends Controller
 {
@@ -112,6 +115,42 @@ class UserController extends Controller
         return redirect('/profile');
     
     }
+
+
+
+    public function create()
+    {
+     
+            
+        $user = new User();
+        return view('user.create')->withUser($user);
+
+    }
+    public function store(UserPost $request)
+    {
+        $newUser = User::create($request->validated());
+       
+        return redirect()->route('user.list')
+            ->with('alert-msg', 'User "' . $newUser->name . '" foi criada com sucesso!')
+            ->with('alert-type', 'success');
+    
+        }
+    public function edit2(User $user)
+    {
+       
+        return view('user.edit')
+            ->withUser($user);
+            
+    }
+    public function update(UserPost $request, User $user)
+    {
+        $user->fill($request->validated());
+        $user->save();
+        return redirect()->route('user.list')
+            ->with('alert-msg', 'User "' . $user->id . '" foi alterado com sucesso!')
+            ->with('alert-type', 'success');
+    }
+
 
     
 
