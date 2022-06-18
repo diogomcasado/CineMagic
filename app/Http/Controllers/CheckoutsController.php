@@ -38,7 +38,7 @@ class CheckoutsController extends Controller
 		// 		break;
 		// }
 		
-		return view('Checkout.list')->withRecibos($recibos);
+		return view('historico.list')->withRecibos($recibos);
 	}
 
 	public function store(Request $request)

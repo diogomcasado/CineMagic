@@ -65,7 +65,7 @@ Route::get('checkout/create','App\Http\Controllers\CheckoutsController@create')-
 
 //historico
 Route::get('bilhetes/list','App\Http\Controllers\BilhetesController@list')->name('historico.listB');
-Route::get('checkout/list','App\Http\Controllers\CheckoutsController@index')->name('checkout.list');
+Route::get('recibos/list','App\Http\Controllers\CheckoutsController@index')->name('historico.list');
 
 //PDF
 Route::get('checkout/pdf/{ckeckout}','App\Http\Controllers\CheckoutsController@create')->name('checkout.pdf');

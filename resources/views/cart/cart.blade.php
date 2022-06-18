@@ -104,7 +104,7 @@
                                 </head>
                                 <body>
                                     <!-- Botão que irá abrir o modal -->
-                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#meuModal" aria-pressed="true">Checkout</button>
+                                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#meuModal" >Checkout</button>
 
                                     <!-- Modal -->
                                     <div id="meuModal" class="modal fade" role="dialog">
