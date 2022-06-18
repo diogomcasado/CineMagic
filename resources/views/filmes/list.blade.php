@@ -5,16 +5,22 @@
 
 @section('content')
     <h1>Catálogo</h1>
-    <div id="search_div_categoria" class="col-md justify-content-md-center">
-                <!-- <select id="search_categoria" name="categoria_id" class="form-control ">
-                    <option value="" selected>--Genero--</option> -->
+    <div id="search_div_filme" class="col-md justify-content-md-center">
+                <select id="search_genero" name="genero_code" class="form-control ">
+                    <option value="" selected>--Genero--</option>
                    
+                    @foreach($generos as $genero)
+                    <option value="{{$genero->code}}" {{ old("genero_code") == $genero->code ? "selected" : "" }}>
+                        {{$genero->code}}
                     </option>
+                    @endforeach
                   
                 </select>
-            </div>
+    </div>
             <form id="form_search" action="{{route('filmes.list')}}" method="GET">
+        
         <div class="input-group justify-content-center">
+
             <div class="form-outline">
                 <input value="{{old('inputsearch')}}" name="inputsearch" id="input_search" type="search"
                     class="form-control" />

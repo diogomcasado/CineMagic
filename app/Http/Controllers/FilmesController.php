@@ -26,20 +26,20 @@ class FilmesController extends Controller
         $privada = false;
         $generos = Genero::all();
 
-        // if ($request->inputsearch) {
+        //  if ($request->inputsearch) {
 
-        //     $titulo = [];
+        //     // $filmesListFinal = Filme::where('nome', 'like', '%' . $request->inputsearch . '%')->get('id');
+        //     // foreach ($categorias as $categoria) {
+        //     //     array_push($categorias_id, strval($categoria->id));
+        //     // }
 
-        //     $filmesListFinal = Filme::where('titulo', 'like', '%' . $request->inputsearch . '%')->get('id');
-        //     foreach ($filmesListFinal as $filme) {
-        //         array_push($titulo, strval($filme->id));
-        //     }
-
-        //     $filmesListFinal->where('titulo', 'like', '%' . $request->inputsearch . '%')
-        //         ->Where('descricao', 'like', '%' . $request->inputsearch . '%')
-        //         ->WhereIn('titulo', $titulo);
+        //     $filmesListFinal=Filme::where('titulo', 'like', '%' . $request->inputsearch . '%');
+        // }
+        // if ($request->genero_code != null) {
+        //     $filmesListFinal=Filme::where('genero_code', '=', $request->genero_code);
         // }
 
+        $request->flash();
         return view('filmes.list', compact('filmesListFinal','privada','generos'));
 
     }
@@ -76,17 +76,35 @@ class FilmesController extends Controller
         // }
 
         #$full = $user->concat($cliente);
-
+            
 
         return view('filmes.lista', compact('filmes'));
         // return view('user.profile', compact('user', 'cliente'));
     }
 
-    public function list()
+    public function list(Request $request)
     {
         $filmes = Filme::paginate(25);
 
-        return view('filmes.lista', compact('filmes'));
+        $generos = Genero::all();
+
+         if ($request->inputsearch) {
+
+            // $filmesListFinal = Filme::where('nome', 'like', '%' . $request->inputsearch . '%')->get('id');
+            // foreach ($categorias as $categoria) {
+            //     array_push($categorias_id, strval($categoria->id));
+            // }
+
+            $filmes=Filme::where('titulo', 'like', '%' . $request->input_search . '%');
+        }
+        if ($request->genero_code != null) {
+            $filmes=Filme::where('genero_code', '=', $request->genero_code);
+        }
+
+         $request->flash();
+       
+
+        return view('filmes.lista', compact('filmes','generos'));
     }
 
     public function create()

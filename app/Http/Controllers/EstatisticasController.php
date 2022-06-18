@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\Recibo;
 class EstatisticasController extends Controller
 {
     /**
@@ -14,9 +14,26 @@ class EstatisticasController extends Controller
      */
     public function index(Request $request)
     {   
-        $clientes = DB::table('users')->where('tipo', '=','C')->paginate(12);
-        
-        return view('estatisticas.index', compact('clientes'));
+    
+
+
+        $recibos =Recibo::groupBy('cliente_id')
+        ->selectRaw('sum(preco_total_com_iva) as sum, cliente_id')
+        ->get();
+
+        return view('estatisticas.index', compact('recibos'));
+    }
+
+    public function pagamentos(Request $request)
+    {   
+    
+        $tpagamentos = DB::table('recibos')
+        ->select('tipo_pagamento', DB::raw('count(*) as total'))
+        ->groupBy('tipo_pagamento')
+        ->get();
+
+
+        return view('estatisticas.pagamentos', compact('tpagamentos'));
     }
 
     /**

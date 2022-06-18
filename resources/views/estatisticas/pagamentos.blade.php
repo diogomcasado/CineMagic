@@ -18,16 +18,15 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('estatisticas.index') }}" >
                                 <span data-feather="users"></span>
-                                Clientes <span class="sr-only">(atual)</span>
+                                Clientes
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('pagamentos.index') }}">
                                 <span data-feather="shopping-cart"></span>
-                               Pagamentos
+                                Pagamentos <span class="sr-only">(atual)</span>
                             </a>
                         </li>
-                      
 
                     </ul>
                 </div>
@@ -37,13 +36,13 @@
               
 
 
-                <h2>Listagem de valor total gasto por Clientes</h2>
+                <h2>Pagamentos mais utilizados</h2>
                 <div  class="table-responsive">
                     <table id="tabela" class="table table-striped table-sm">
                         <thead>
                             <tr>
-                                <th>Cliente_id </th>
-                                <th>Valor total gasto</th>
+                                <th>Tipo de pagamento </th>
+                                <th>Numero de utilizações</th>
                               
                             </tr>
                         </thead>
@@ -51,16 +50,18 @@
                         
 
                         <tbody>
-                        @foreach($recibos as $rec)
+                    
+                        @foreach($tpagamentos as $pag)
                             <tr>
-                                <td > 	{{$rec->cliente_id}}</td>
-                                <td > 	{{$rec->sum}}</td>
+                                <td > 	{{$pag->tipo_pagamento}}</td>
+                                <td > 	{{$pag->total}}</td>
                             </tr>
                          
                             @endforeach
+                         
+                          
                         </tbody>
                     </table>
-                 
 
                 </div>
             </main>

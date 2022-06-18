@@ -7,6 +7,34 @@
 <hr>
 <<div class="container">
 <table class="table table-bordered table-striped table-sm">
+<div id="search_div_filme" class="col-md justify-content-md-center">
+                <select id="search_genero" name="genero_code" class="form-control ">
+                    <option value="" selected>--Genero--</option>
+                   
+                    @foreach($generos as $genero)
+                    <option value="{{$genero->code}}" {{ old("genero_code") == $genero->code ? "selected" : "" }}>
+                        {{$genero->code}}
+                    </option>
+                    @endforeach
+                  
+                </select>
+    </div>
+            <form id="form_search" action="{{route('filme.lista')}}" method="GET">
+        
+        <div class="input-group justify-content-center">
+
+            <div class="form-outline">
+                <input value="{{old('inputsearch')}}" name="inputsearch" id="input_search" type="search"
+                    class="form-control" />
+            </div>
+           
+            <button id="btn_search" type="submit" class="btn btn-secondary">
+                <i class="fas fa-search"></i>
+            </button>
+
+        </div>
+
+    </form>
     </div>
     <a href="{{route('filmes.create')}}" class="btn btn-success" role="button" aria-pressed="true">Adicionar Filme</a>
     <table class="table">

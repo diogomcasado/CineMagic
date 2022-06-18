@@ -26,7 +26,9 @@
     <label for="inputGenero">Genero</label>
     <select class="form-control" name="Genero" id="inputGenenro">
     @foreach ($generos as $genero)
-           <option value={{$genero}} {{$genero == old('filme', $genero->nome) ? 'selected' : ''}}>{{$genero}}</option>
+           <option value="{{$genero->code}}" {{ old("genero_code") == $genero->code ? "selected" : "" }}>
+                        {{$genero->code}}
+                    </option>
         @endforeach
     </select>
     @error('genero')

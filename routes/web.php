@@ -88,6 +88,7 @@ Route::post('admin', 'App\Http\Controllers\ConfiguracaoController@edit')->middle
 
 //Estatisticas
 Route::get('estatisticas','App\Http\Controllers\EstatisticasController@index')->middleware(['auth', 'verified'])->name('estatisticas.index');
+Route::get('pagamentos','App\Http\Controllers\EstatisticasController@pagamentos')->middleware(['auth', 'verified'])->name('pagamentos.index');
 
 Auth::routes(['verify' => true]);
 
