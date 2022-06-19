@@ -30,11 +30,26 @@ class SessaoController extends Controller
         return view('sessao.controlo', compact('filmesListFinal'));
     }
 
-    public function get_sessao($id)
+    public function get_data($id)
     {
         //$sessoes = Sessao::where('filme_id', $id)->pluck("data","id");
 
-        $sessoes = Sessao::where('filme_id', $id)->where('data', '>', Carbon::now()->toDateString())->pluck("data","id");
+        $sessoes = Sessao::where('filme_id', $id)
+        ->groupBy('data')
+        ->having('data', '>', Carbon::now()->toDateString())
+        ->pluck("data");
+
+        //dd($sessoes);
+        return json_encode($sessoes);
+        
+    }
+
+    public function get_horario($id, $data)
+    {
+        //dd($data);
+        $sessoes = Sessao::where('filme_id', $id)
+        ->whereDate('data', '=', $data)
+        ->pluck("horario_inicio", "id");
 
         //dd($sessoes);
         return json_encode($sessoes);

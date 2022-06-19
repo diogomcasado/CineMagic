@@ -30,7 +30,7 @@
         @if(!empty($filmesListFinal))
         <div class="col-12">
             <label for="filme" class="form-label">Filme: </label>
-            <select name="filme" id="idFilme" class="form-control">
+            <select name="filme" id="filme" class="form-control">
                 <option value="">--- Selecione Filme ---</option>
                 @foreach($filmesListFinal as $abr)
                 <option value="{{$abr->id}}">{{$abr->titulo}}</option>
@@ -47,11 +47,11 @@
 
         </div>
         
-
-
-        
         <div class="col-12">
-            <label for="email" class="form-label">Horario: </label>
+            <label for="horario" class="form-label">Horario </label>
+            <select name="horario" id="horario" class="form-control">
+                <option value="">--Horario--</option>
+            </select>
         </div>
         
 
@@ -75,13 +75,14 @@
                if(filmeID)
                {
                   jQuery.ajax({
-                     url : 'controlo/get_sessao/' +filmeID,
+                     url : 'controlo/get_data/' +filmeID,
                      type : "GET",
                      dataType : "json",
                      success:function(data)
                      {
                         console.log(data);
                         jQuery('select[name="sessao"]').empty();
+                        $('select[name="sessao"]').append('<option value="">'+ "--Sessao--" +'</option>');
                         jQuery.each(data, function(key,value){
                            $('select[name="sessao"]').append('<option value="'+ key +'">'+ value +'</option>');
                         });
@@ -91,6 +92,34 @@
                else
                {
                   $('select[name="sessao"]').empty();
+               }
+            });
+
+            jQuery('select[name="sessao"]').on('change',function(){
+               var filmeID = jQuery('select[name="filme"]').val();
+               var sessao = $( "#sessao option:selected" ).text();
+               console.log(filmeID);
+               console.log(sessao);
+               if(filmeID)
+               {
+                  jQuery.ajax({
+                     url : 'controlo/get_horario/' +filmeID + '/' + sessao,
+                     type : "GET",
+                     dataType : "json",
+                     success:function(data)
+                     {
+                        console.log(data);
+                        jQuery('select[name="horario"]').empty();
+                        $('select[name="sessao"]').append('<option value="">'+ "--Horario--" +'</option>');
+                        jQuery.each(data, function(key,value){
+                           $('select[name="horario"]').append('<option value="'+ key +'">'+ value +'</option>');
+                        });
+                     }
+                  });
+               }
+               else
+               {
+                  $('select[name="horario"]').empty();
                }
             });
     });
