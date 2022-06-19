@@ -1,0 +1,15 @@
+.main{
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+.filme-imagem img {
+    width: 100px;
+    height: auto;
+    margin-left: 25%;
+    
+}
+
+.input {
+    width: 100px;
+}

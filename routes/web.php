@@ -74,6 +74,9 @@ Route::get('checkout/pdf/{ckeckout}','App\Http\Controllers\CheckoutsController@c
 Route::get('controlo', 'App\Http\Controllers\SessaoController@index')->name('controlo');
 Route::get('controlo/get_data/{id}', 'App\Http\Controllers\SessaoController@get_data')->name('controlo.data');
 Route::get('controlo/get_horario/{id}/{data}', 'App\Http\Controllers\SessaoController@get_horario')->name('controlo.horario');
+Route::get('controlo/{sessao}', 'App\Http\Controllers\SessaoController@sessao')->name('controlo.sessao');
+Route::post('controlo/bilhete', 'App\Http\Controllers\SessaoController@bilhete')->name('encontra.bilhete');
+Route::post('controlo/bilhete/validar', 'App\Http\Controllers\BilhetesController@valida_bilhete')->name('bilhete');
 
 Route::get('sessoes/list', 'App\Http\Controllers\sessaoController@list')->middleware(['auth', 'verified'])->name('sessao.list');
 Route::get('Sessao/{sessao}/edit', 'App\Http\Controllers\SessaoController@edit')->middleware(['auth', 'verified'])->name('sessao.edit');

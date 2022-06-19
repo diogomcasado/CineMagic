@@ -13,19 +13,19 @@
 @endif
 
 @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
 @endif
 
 
 <div class="main">
     <h1>Controlo de acesso á sessão</h1>
-    <form action="" method="POST">
+    <form action="" method="GET">
         @csrf
         @if(!empty($filmesListFinal))
         <div class="col-12">
@@ -46,17 +46,17 @@
             </select>
 
         </div>
-        
+
         <div class="col-12">
             <label for="horario" class="form-label">Horario </label>
             <select name="horario" id="horario" class="form-control">
                 <option value="">--Horario--</option>
             </select>
         </div>
-        
+
 
         <div class="btn">
-            <button class="w-100 btn btn-primary btn-lg" type="submit">Entrar</button>
+            <button class="w-100 btn btn-primary btn-lg" onclick="goToURL(); return false;">Entrar</button>
         </div>
 
         @else
@@ -67,63 +67,68 @@
 </div>
 
 <script type="text/javascript">
-    jQuery(document).ready(function ()
-    {
-            jQuery('select[name="filme"]').on('change',function(){
-               var filmeID = jQuery(this).val();
-               console.log(filmeID);
-               if(filmeID)
-               {
-                  jQuery.ajax({
-                     url : 'controlo/get_data/' +filmeID,
-                     type : "GET",
-                     dataType : "json",
-                     success:function(data)
-                     {
+    jQuery(document).ready(function () {
+        jQuery('select[name="filme"]').on('change', function () {
+            var filmeID = jQuery(this).val();
+            console.log(filmeID);
+            if (filmeID) {
+                jQuery.ajax({
+                    url: 'controlo/get_data/' + filmeID,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
                         console.log(data);
                         jQuery('select[name="sessao"]').empty();
-                        $('select[name="sessao"]').append('<option value="">'+ "--Sessao--" +'</option>');
-                        jQuery.each(data, function(key,value){
-                           $('select[name="sessao"]').append('<option value="'+ key +'">'+ value +'</option>');
+                        $('select[name="sessao"]').append('<option value="">' + "--Sessao--" + '</option>');
+                        jQuery.each(data, function (key, value) {
+                            $('select[name="sessao"]').append('<option value="' + key + '">' + value + '</option>');
                         });
-                     }
-                  });
-               }
-               else
-               {
-                  $('select[name="sessao"]').empty();
-               }
-            });
+                    }
+                });
+            }
+            else {
+                $('select[name="sessao"]').empty();
+            }
+        });
 
-            jQuery('select[name="sessao"]').on('change',function(){
-               var filmeID = jQuery('select[name="filme"]').val();
-               var sessao = $( "#sessao option:selected" ).text();
-               console.log(filmeID);
-               console.log(sessao);
-               if(filmeID)
-               {
-                  jQuery.ajax({
-                     url : 'controlo/get_horario/' +filmeID + '/' + sessao,
-                     type : "GET",
-                     dataType : "json",
-                     success:function(data)
-                     {
+        jQuery('select[name="sessao"]').on('change', function () {
+            var filmeID = jQuery('select[name="filme"]').val();
+            var sessao = $("#sessao option:selected").text();
+            console.log(filmeID);
+            console.log(sessao);
+            if (filmeID) {
+                jQuery.ajax({
+                    url: 'controlo/get_horario/' + filmeID + '/' + sessao,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
                         console.log(data);
                         jQuery('select[name="horario"]').empty();
-                        $('select[name="sessao"]').append('<option value="">'+ "--Horario--" +'</option>');
-                        jQuery.each(data, function(key,value){
-                           $('select[name="horario"]').append('<option value="'+ key +'">'+ value +'</option>');
+                        $('select[name="sessao"]').append('<option value="">' + "--Horario--" + '</option>');
+                        jQuery.each(data, function (key, value) {
+                            $('select[name="horario"]').append('<option value="' + key + '">' + value + '</option>');
                         });
-                     }
-                  });
-               }
-               else
-               {
-                  $('select[name="horario"]').empty();
-               }
-            });
+                    }
+                });
+            }
+            else {
+                $('select[name="horario"]').empty();
+            }
+        });
+
+
+
+
+
     });
-    </script>
+
+    function goToURL() {
+        var sessaoID = jQuery('select[name="horario"]').val();
+        console.log(sessaoID);
+        if (sessaoID) {
+            window.location.href = '/controlo/' + sessaoID;
+        }
+    }
+</script>
 
 @endsection
-
