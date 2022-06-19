@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
 use App\Models\Filme;
 use App\Models\Sessao;
+use App\Models\Cliente;
+use App\Models\User;
+use App\Models\Bilhete;
 use Carbon\Carbon;
 use App\Http\Requests\SessaoPost;
 use Auth;
@@ -53,6 +55,62 @@ class SessaoController extends Controller
 
         //dd($sessoes);
         return json_encode($sessoes);
+        
+    }
+
+    public function sessao($sessao_id)
+    {
+        $sessao = Sessao::findOrFail($sessao_id);
+
+        //$sessoes = $filme->sessao->where('data', '>', Carbon::today());
+        $filme_id = $sessao->filme_id;
+        $filme = Filme::findOrFail($filme_id);
+        //dd($filme);
+      
+        $data = array (
+            "sessao" => $sessao,
+            "filme" => $filme,
+
+        );
+
+        //dd($sessoes);
+
+        return view('sessao.controloSessao')->with($data);
+        //->withSessao($sessao)
+    }
+
+    public function bilhete(Request $request)
+    {
+        $bilhete_id = $request->bilhete;
+        $sessao_id = $request->id_sessao;
+        $filme_id = $request->id_filme;
+        
+        
+        $bilhete = Bilhete::findOrFail($bilhete_id);
+        $filme = Filme::findOrFail($filme_id);
+        $sessao = Sessao::findOrFail($sessao_id);
+
+        $cliente_id = $bilhete->cliente_id;
+
+        $cliente = Cliente::findOrFail($cliente_id);
+        $user = User::findOrFail($cliente_id);
+
+        $data = array (
+            "sessao" => $sessao,
+            "filme" => $filme,
+            "bilhete" => $bilhete,
+            "cliente" => $cliente,
+            "user" => $user,
+
+        );
+
+        if($bilhete->sessao_id == $sessao_id)
+        {
+            return view('sessao.controloBilhete')->with($data);
+        } else {
+            return back()->with('error', 'O bilhete não é da sessão selecionada');
+        }
+        return back()->with('error', 'O bilhete não é da sessão selecionada');
         
     }
 
