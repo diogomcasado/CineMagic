@@ -26,7 +26,19 @@ class UserPost extends FormRequest
          return  [
              'name' =>       'required',
              'email' =>       'required',
-             'password' =>       'required'
+             'password' =>       'required',
+             'tipo' =>       'required'
+             
          ];
+    }
+    public function messages()
+    {
+        return [
+            'name.required' => 'Insira nome',
+            'name.required' => 'Insira email',
+            'password.required' => 'Insira Password',
+            'tipo.required' => 'Escolha um tipo',
+        
+        ];
     }
 }

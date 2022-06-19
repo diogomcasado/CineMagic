@@ -7,13 +7,17 @@
             <label for="name" class="form-label">Name</label>
             <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}">
         </div>
-
+        @error('name')
+        <div class="small text-danger">{{$message}}</div>
+        @enderror
         <div class="col-12">
             <!-- email_verified_at need to verify to put date  -->
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}">
         </div>
-
+        @error('email')
+        <div class="small text-danger">{{$message}}</div>
+    @enderror
 
         <div class="col-12">
             <label for="name" class="form-label">Tipo</label>
@@ -25,7 +29,9 @@
 
             </select>
         </div>
-
+        @error('tipo')
+        <div class="small text-danger">{{$message}}</div>
+        @enderror
         <div class="form-group">
     <div class="form-check form-check-inline">
         <input type="hidden" name="bloquado" value="0">
@@ -34,9 +40,7 @@
             Bloqueado
         </label>
     </div>
-    @error('admin')
-        <div class="small text-danger">{{$message}}</div>
-    @enderror
+    
 </div>
 
         <div class="col-12">
@@ -44,7 +48,9 @@
             <label for="password" class="form-label">Password</label>
             <input type="password" class="form-control" id="password" name="password" placeholder="Password">
         </div>
-
+        @error('password')
+        <div class="small text-danger">{{$message}}</div>
+    @enderror
         <div class="col-12">
             <label for="photo" class="form-label">Photo Link</label>
             <input type="file" id="photo" name="photo" class="form-control">

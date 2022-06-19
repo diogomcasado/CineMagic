@@ -85,7 +85,6 @@
         <div class="form-group">
             <label class="col-md-8 control-label" for="button1id"></label>
             <div class="col-md-8">
-                <button id="submit" name="submit" class="btn btn-secondary">Finalizar Compra</button>
                 <html lang="pt-br">
                                 <head>
 
@@ -96,7 +95,7 @@
                                 </head>
                                 <body>
                                     <!-- Botão que irá abrir o modal -->
-                                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#meuModal">Finalizar Compra</button>
+                                    <button method="POST" action="{{route('checkout.store')}}"  id="submit" name="submit" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#meuModal">Finalizar Compra</button>
 
                                     <!-- Modal -->
                                     <div id="meuModal" class="modal fade" role="dialog">
@@ -113,8 +112,11 @@
                                         <!-- Corpo do modal -->
                                         <div class="modal-body">
 
-                                        <a href="{{route('filmes.list')}}"> <button class="checkout-cta">OK
-                                            
+
+                                        <form action="{{ route('email.send_with_notification1') }}" method="POST">
+                                        @csrf
+                                        <input type="submit" value="ok" button class="checkout-cta">
+                                    </form>
                                         </div>
                                         
                                         </div>

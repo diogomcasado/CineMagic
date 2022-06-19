@@ -25,9 +25,19 @@ class FilmePost extends FormRequest
     {
          return  [
              'titulo' =>       'required',
-             'genero_code' =>  'required',
              'sumario' =>       'required',
-             'url_code' =>       'required'     
+             'trailer_url' =>    'required'
+                  
          ];
+    }
+    public function messages()
+    {
+    
+        return [
+            'titulo.required' => 'Insira titulo',
+            'sumario.required' => 'Insira sumario',
+            'trailer_url.required' => 'Insira o trailer'
+        
+        ];
     }
 }

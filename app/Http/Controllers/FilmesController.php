@@ -67,20 +67,7 @@ class FilmesController extends Controller
 
     /////////////////////
 
-    public function index2()
-    {
-        // $user = User::findOrFail(Auth::id());
-        // $cliente = Cliente::findOrFail(Auth::id());
-        // if($user->tipo == 'F'){
-        //     return abort(403, 'Unauthorized action.');
-        // }
-
-        #$full = $user->concat($cliente);
-            
-
-        return view('filmes.lista', compact('filmes'));
-        // return view('user.profile', compact('user', 'cliente'));
-    }
+   
 
     public function list(Request $request)
     {
@@ -90,12 +77,9 @@ class FilmesController extends Controller
 
          if ($request->inputsearch) {
 
-            // $filmesListFinal = Filme::where('nome', 'like', '%' . $request->inputsearch . '%')->get('id');
-            // foreach ($categorias as $categoria) {
-            //     array_push($categorias_id, strval($categoria->id));
-            // }
+            
 
-            $filmes=Filme::where('titulo', 'like', '%' . $request->input_search . '%');
+            $filmes=Filme::where('titulo', 'LIKE', '%' . $request->input_search . '%')->get();
         }
         if ($request->genero_code != null) {
             $filmes=Filme::where('genero_code', '=', $request->genero_code);
@@ -122,7 +106,7 @@ class FilmesController extends Controller
         $newFilme = Filme::create($request->validated());
        
         return redirect()->route('filmes.lista')
-            ->with('alert-msg', 'Filme "' . $newFilme->id . '" foi criada com sucesso!')
+            ->with('alert-msg', 'Filme "' . $newFilme->titulo . '" foi criada com sucesso!')
             ->with('alert-type', 'success');
     
         }

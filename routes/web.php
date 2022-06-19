@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EmailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,14 +63,23 @@ Route::post('clear', 'App\Http\Controllers\CartController@clear')->name('cart.cl
 
 //checkout
 Route::get('checkout/create','App\Http\Controllers\CheckoutsController@create')->name('checkout.create');
+Route::post('checkout/store','App\Http\Controllers\CheckoutsController@store')->name('checkout.store');
+
 
 //historico
 Route::get('bilhetes/list','App\Http\Controllers\BilhetesController@list')->name('historico.listB');
 Route::get('recibos/list','App\Http\Controllers\CheckoutsController@index')->name('historico.list');
 
 //PDF
-Route::get('checkout/pdf/{ckeckout}','App\Http\Controllers\CheckoutsController@create')->name('checkout.pdf');
+Route::get('checkout/pdf_recibo','App\Http\Controllers\CheckoutsController@pdf_recibo')->name('pdf.pdf_recibo.blade');
+Route::get('checkout/pdf_bilhete','App\Http\Controllers\CheckoutsController@pdf_bilhete')->name('pdf.pdf_bilhete.blade');
 
+
+//Email
+
+Route::get('invoices/{id}', 'App\Http\Controllers\InvoiceController@show')->name('invoices.show');
+
+Route::post('email/notification/1', 'App\Http\Controllers\EmailController@send_email_with_notification1')->name('email.send_with_notification1');
 //sessao
 Route::get('controlo', 'App\Http\Controllers\SessaoController@index')->name('controlo');
 Route::get('controlo/get_data/{id}', 'App\Http\Controllers\SessaoController@get_data')->name('controlo.data');

@@ -20,8 +20,8 @@
               </td>
 
               <td>
-                Fatura #: {{$recibo->id}}<br />
-                {{$recibo->data}}<br />
+                Fatura:#<br />
+                #<br />
               </td>
             </tr>
           </table>
@@ -39,8 +39,8 @@
               </td>
 
               <td>
-                {{$recibo->cliente->user->name}}<br />
-                {{$recibo->cliente->user->email}}
+                #<br />
+               
               </td>
             </tr>
           </table>
@@ -50,33 +50,45 @@
       <tr class="heading">
         <td>Payment Method</td>
 
-        <td>##</td>
+        <td>Data</td>
       </tr>
-
-      <tr class="details">
-        <td>{{$recibo->tipo_pagamento}}</td>
-
-        <td>{{$recibo->preco_total}} €</td>
-      </tr>
-
       <tr class="heading">
-        <td>Item</td>
+        <td>Data</td>
 
-        <td>Price</td>
+        <td>xx/xx/xx</td>
       </tr>
-      @foreach($recibo->filmes as $filme)
-      <tr class="item">
-        <td>Filme: {{$filme->Titulo}}</td>
+      <tr class="heading">
+        <td>Tipo de Pagamento</td>
 
-     
+        <td>xxx</td>
       </tr>
-      @endforeach
+      <tr class="heading">
+        <td>NIF</td>
 
-
-      <tr class="total">
-        <td></td>
-        <td>Total: {{$recibo->preco_total_com_iva}} €</td>
+        <td>xxxxxxxxx</td>
       </tr>
+      <tr class="heading">
+        <td>ID bilhete</td>
+
+        <td>xxx</td>
+      </tr>
+      <tr class="heading">
+        <td>Filme</td>
+
+        <td>xxxx</td>
+      </tr>
+      <tr class="heading">
+        <td>Sala</td>
+
+        <td>xxxx</td>
+      </tr>
+      <tr class="heading">
+        <td>Valor Total</td>
+
+        <td>€</td>
+      </tr>
+
+      
     </table>
   </div>
 </body>
