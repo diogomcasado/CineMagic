@@ -27,7 +27,7 @@ class UserPost extends FormRequest
              'name' =>       'required',
              'email' =>       'required',
              'password' =>       'required',
-             'tipo' =>       'required'
+             
              
          ];
     }
@@ -37,7 +37,7 @@ class UserPost extends FormRequest
             'name.required' => 'Insira nome',
             'name.required' => 'Insira email',
             'password.required' => 'Insira Password',
-            'tipo.required' => 'Escolha um tipo',
+            
         
         ];
     }

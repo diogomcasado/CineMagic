@@ -42,6 +42,7 @@ Route::put('users/{user}/update', 'App\Http\Controllers\userController@update')-
 Route::get('user/{user}/edit', 'App\Http\Controllers\userController@edit2')->middleware(['auth', 'verified'])->name('user.edit2');
 Route::get('user/user/create', 'App\Http\Controllers\userController@create')->middleware(['auth', 'verified'])->name('user.create');
 Route::post('users', 'App\Http\Controllers\userController@store')->middleware(['auth', 'verified'])->name('user.store');
+Route::delete('user/apagar/{user}','App\Http\Controllers\UserController@destroy2')->middleware(['auth', 'verified'])->name('user.destroy2');
 
  
 

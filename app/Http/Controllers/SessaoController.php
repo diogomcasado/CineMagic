@@ -156,6 +156,28 @@ class SessaoController extends Controller
             ->with('alert-type', 'success');
     }
 
+    public function destroy(Sessao $sessao)
+     {
+         $oldSessao = $sessao->id;
+         try {
+             $sessao->delete();
+             return redirect()->route('sessao.list')
+                 ->with('alert-msg', 'Sessao "' . $oldSessao . '" foi apagado com sucesso!')
+                 ->with('alert-type', 'success');
+         } catch (\Throwable $th) {
+ 
+             if ($th->errorInfo[1] == 1451) {   // 1451 - MySQL Error number for "Cannot delete or update a parent row: a foreign key constraint fails (%s)"
+                 return redirect()->route('sessao.list')
+                     ->with('alert-msg', 'Não foi possível apagar o Sala "' . $oldSessao . '", porque este Sala já está em uso!')
+                     ->with('alert-type', 'danger');
+             } else {
+                 return redirect()->route('sessao.list')
+                     ->with('alert-msg', 'Não foi possível apagar o Sala "' . $oldSessao . '". Erro: ' . $th->errorInfo[2])
+                     ->with('alert-type', 'danger');
+             }
+         }
+     }
+
     
 }
 

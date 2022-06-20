@@ -152,7 +152,24 @@ class UserController extends Controller
     }
 
 
-    
+    public function destroy2(User $user)
+     {
+         $oldUser = $user->id;
+         try {
+             $user->delete();
+             return redirect()->route('user.list')
+                 ->with('alert-msg', 'User "' . $oldUser . '" foi apagado com sucesso!')
+                 ->with('alert-type', 'success');
+         } catch (\Throwable $th) {
+ 
+             if ($th->errorInfo[1] == 1451) {   // 1451 - MySQL Error number for "Cannot delete or update a parent row: a foreign key constraint fails (%s)"
+                
+                 return redirect()->route('user.list')
+                     ->with('alert-msg', 'Não foi possível apagar o User "' . $oldUser . '". Erro: ' . $th->errorInfo[2])
+                     ->with('alert-type', 'danger');
+             }
+         }
+     }
 
 
 }

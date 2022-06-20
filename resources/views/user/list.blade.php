@@ -40,7 +40,7 @@
                     </form>
                 </td>
                 <td>
-                    <form method="POST" action="{{ route('user.destroy', ['user' => $user->id]) }}"
+                    <form method="POST" action="{{ route('user.destroy2', ['user' => $user->id]) }}"
                         style="display: inline" onsubmit="return confirm('Deseja excluir este utilizador?');">
                         @csrf
                         <input type="hidden" name="_method" value="delete">

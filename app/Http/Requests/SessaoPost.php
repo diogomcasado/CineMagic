@@ -24,11 +24,23 @@ class SessaoPost extends FormRequest
     public function rules()
     {
          return  [
-             'id' =>       'required',
+             
              'filme_id' =>  'required',
              'sala_id' =>       'required',
              'data' =>       'required',
              'horario_inicio' =>       'required'     
          ];
+    }
+
+    public function messages()
+    {
+    
+        return [
+            'filme_id.required' => 'Insira um filme',
+            'sala_id.required' => 'Insira uma sala',
+            'data' => 'Insira uma data',
+            'horario_inicio' => 'Insira a hora de inicio'
+        
+        ];
     }
 }
