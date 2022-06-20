@@ -20,24 +20,23 @@ class FilmesController extends Controller
     public function index(Request $request)
     {
         $dataHoje = Carbon::now()->toDateString();
-        $filmesListFinal = Filme::whereHas('sessao', function($query){
-            $query->where('data', '>', Carbon::now()->toDateString());
-        })->simplePaginate(12);
+       
         $privada = false;
         $generos = Genero::all();
 
-        //  if ($request->inputsearch) {
+         if ($request->inputsearch) {
 
-        //     // $filmesListFinal = Filme::where('nome', 'like', '%' . $request->inputsearch . '%')->get('id');
-        //     // foreach ($categorias as $categoria) {
-        //     //     array_push($categorias_id, strval($categoria->id));
-        //     // }
+            $filmesListFinal = Filme::where('titulo', 'like', '%' . $request->inputsearch . '%')->get('id');
+            
 
-        //     $filmesListFinal=Filme::where('titulo', 'like', '%' . $request->inputsearch . '%');
-        // }
-        // if ($request->genero_code != null) {
-        //     $filmesListFinal=Filme::where('genero_code', '=', $request->genero_code);
-        // }
+            // $filmesListFinal=Filme::where('titulo', 'like', '%' . $request->inputsearch . '%');
+        }else{
+
+            $filmesListFinal = Filme::whereHas('sessao', function($query){
+                $query->where('data', '>', Carbon::now()->toDateString());
+            })->simplePaginate(12);
+        }
+        
 
         $request->flash();
         return view('filmes.list', compact('filmesListFinal','privada','generos'));
@@ -71,7 +70,6 @@ class FilmesController extends Controller
 
     public function list(Request $request)
     {
-        $filmes = Filme::paginate(25);
 
         $generos = Genero::all();
 
@@ -79,15 +77,19 @@ class FilmesController extends Controller
 
             
 
-            $filmes=Filme::where('titulo', 'LIKE', '%' . $request->input_search . '%')->get();
-        }
-        if ($request->genero_code != null) {
+            $filmes = Filme::where('titulo', 'like', '%' . $request->inputsearch . '%')->get('id');
+
+        }elseif ($request->genero_code != null) {
             $filmes=Filme::where('genero_code', '=', $request->genero_code);
+        }else{
+
+            $filmes = Filme::all();
+
         }
 
-         $request->flash();
+         
        
-
+        
         return view('filmes.lista', compact('filmes','generos'));
     }
 

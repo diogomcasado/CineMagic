@@ -68,67 +68,18 @@ class CheckoutsController extends Controller
 
 		$cart_items = Cart::content();
 		$precos = Preco::all()->first();
-		$preco_total = 0;
+		
 
-		foreach ($cart_items as $item) {
-			if ($item->model->cliente_id) {
-				if ($item->qty >= $precos->quantidade_desconto) {
-					$preco_un = $precos->preco_un_proprio_desconto;
-				} else {
-					$preco_un = $precos->preco_un_proprio;
-				}
-			} else {
-				if ($item->qty >= $precos->quantidade_desconto) {
-					$preco_un = $precos->preco_un_catalogo_desconto;
-				} else {
-					$preco_un = $precos->preco_un_catalogo;
-				}
-			}
-			$preco_total += $preco_un;
-		}
-		$input['preco_total'] = $preco_total * 1.23;
+		
+	
 		$recibo = Recibo::create($input);
-
-		foreach ($cart_items as $item) {
-			if ($item->model->cliente_id) {
-				if ($item->qty >= $precos->quantidade_desconto) {
-					$preco_un = $precos->preco_un_proprio_desconto;
-				} else {
-					$preco_un = $precos->preco_un_proprio;
-				}
-				
-				// Filme::create([
-				// 	'filme_id' => $filme->id,
-				// 	'estampa_id' => $item->model->id,
-				// 	'cor_codigo' => $item->options['cor']->codigo,
-				// 	'tamanho' => $item->options['tamanho'],
-				// 	'quantidade' => $item->qty,
-				// 	'preco_un' => $preco_un,
-				// 	'subtotal' => $item->qty * $preco_un,
-				// ]);
-			} else {
-				if ($item->qty >= $precos->quantidade_desconto) {
-					$preco_un = $precos->preco_un_catalogo_desconto;
-				} else {
-					$preco_un = $precos->preco_un_catalogo;
-				}
-
-				// Tshirt::create([
-				// 	'encomenda_id' => $encomenda->id,
-				// 	'estampa_id' => $item->model->id,
-				// 	'cor_codigo' => $item->options['cor']->codigo,
-				// 	'tamanho' => $item->options['tamanho'],
-				// 	'quantidade' => $item->qty,
-				// 	'preco_un' => $preco_un,
-				// 	'subtotal' => $item->qty * $preco_un,
-				// ]);
-			}
-		}
+		$newRecibo = Recibo::create($request->validated());
+		
 
 		if ($recibo) {
 			Session::flash('success', "A encomenda #{$recibo->id} foi criada com sucesso!");
 			Cart::destroy();
-			Mail::to(Auth::user()->email)->send(new NotificarPendente($recibo));
+			Mail::to(Auth::user()->email)->send(new send_email_with_notification1($recibo));
 			return redirect()->route('filmes.list');
 		}
 		return redirect()->back()->withErrors(['error', "Erro na compra!"]);
@@ -142,26 +93,17 @@ class CheckoutsController extends Controller
 
 	public function update(Request $request, Recibo $recibo)
 	{
-		// $request->validate(['estado' => ['required', Rule::in(['paga', 'fechada','anulada'])]]);
+		
+		
+			$pdf = PDF::loadView('pdf.pdf_view', compact('encomenda'));
 
-		// $encomenda->estado = request()->estado;
+			Storage::put('pdf_recibos/' . $recibo->id . '.pdf', $pdf->output());
 
-		// if ($request->estado == 'paga') {
-		// 	Mail::to(Auth::user()->email)->send(new NotificarPaga($recibo));
-		// } elseif($request->estado == 'fechada') {
-		// 	// Generate PDF
-		// 	// share data to view
-		// 	$pdf = PDF::loadView('pdf.pdf_view', compact('encomenda'));
+			$recibo->recibo_pdf_url = $recibo->id . '.pdf';
 
-		// 	Storage::put('pdf_recibos/' . $encomenda->id . '.pdf', $pdf->output());
-
-		// 	$encomenda->recibo_url = $encomenda->id . '.pdf';
-
-		// 	Mail::to(Auth::user()->email)->send(new NotificarFechada($encomenda));
-		// }else{
-		// 	Mail::to(Auth::user()->email)->send(new NotificarAnulada());
-		// }
-		$pdf = PDF::loadView('pdf.pdf_view');
+			Mail::to(Auth::user()->email)->send(new NotificarFechada($encomenda));
+	
+		$pdf = PDF::loadView('pdf.pdf_recibo');
 
 		Storage::put('pdf_recibos/' . $recibo->id . '.pdf', $pdf->output());
 
@@ -169,7 +111,7 @@ class CheckoutsController extends Controller
 
 		$recibo->save();
 
-		return redirect()->back()->with(['success', "A encomenda #{$encomenda->id} foi atualizada com sucesso!"]);
+		return redirect()->back()->with(['success', "A compra #{$recibo->id} foi atualizada com sucesso!"]);
 	}
 
 	public function pdf_recibo(Recibo $recibo)

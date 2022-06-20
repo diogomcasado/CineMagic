@@ -24,7 +24,6 @@ class EmailController extends Controller
         $invoice = null;
         // Send to user:
         $user = User::findOrFail(Auth::id());
-
         $user->notify(new InvoicePaid($invoice));
         return redirect()->route('filmes.list')
             ->with('alert-type', 'success')

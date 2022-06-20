@@ -85,6 +85,5 @@
             @endforeach
         </tbody>
     </table>
-    {{ $filmes->withQueryString()->links() }}
 
 @endsection

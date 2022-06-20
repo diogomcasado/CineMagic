@@ -106,7 +106,7 @@
 
                                         <!-- Cabeçalho do modal -->
                                         <div class="modal-header">
-                                            <h4 class="modal-title">Compra Realizado com sucesso</h4>
+                                            <h4 class="modal-title">Compra Realizada com sucesso</h4>
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         </div>
                                         <!-- Corpo do modal -->

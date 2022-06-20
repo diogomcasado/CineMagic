@@ -22,7 +22,7 @@
         <div class="input-group justify-content-center">
 
             <div class="form-outline">
-                <input value="{{old('inputsearch')}}" name="inputsearch" id="input_search" type="search"
+                <input value="{{old('inputsearch')}}" name="inputsearch" id="input_search" type="search" placeholder="Search for movie"
                     class="form-control" />
             </div>
            
@@ -45,6 +45,5 @@
         @endforeach
     </div>
 
-    {{ $filmesListFinal->links() }}
 @endsection
 
