@@ -43,6 +43,8 @@
                             <a href="{{ route('filme.lista') }}">| Lista Filmes</a>
                             <a href="{{ route('sala.list') }}">| Lista Salas</a>
                             <a href="{{ route('sessao.list') }}">| Lista Sessões</a>
+                            <a href="{{ route('genero.list') }}">| Lista de Generos</a>
+
                             <a href="{{ route('estatisticas.index') }}">| Estatisticas| </a>
                             @endif
                             @if(Auth::user() and Auth::user()->tipo == 'F')

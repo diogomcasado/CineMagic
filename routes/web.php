@@ -55,6 +55,14 @@ Route::delete('sala/apagar/{sala}','App\Http\Controllers\salasController@destroy
 Route::get('salas/lista/create', 'App\Http\Controllers\salasController@create')->middleware(['auth', 'verified'])->name('salas.create');
 Route::post('salas', 'App\Http\Controllers\salasController@store')->middleware(['auth', 'verified'])->name('salas.store');
 
+//Generos
+Route::get('generos/list', 'App\Http\Controllers\generosController@list')->middleware(['auth', 'verified'])->name('genero.list');
+Route::put('generos/{genero}/update', 'App\Http\Controllers\generosController@update')->middleware(['auth', 'verified'])->name('genero.update');
+Route::get('genero/{genero}/edit', 'App\Http\Controllers\generosController@edit')->middleware(['auth', 'verified'])->name('genero.edit');
+Route::delete('genero/apagar/{genero}','App\Http\Controllers\generosController@destroy')->middleware(['auth', 'verified'])->name('genero.destroy');
+Route::get('generos/lista/create', 'App\Http\Controllers\generosController@create')->middleware(['auth', 'verified'])->name('generos.create');
+Route::post('generos', 'App\Http\Controllers\generosController@store')->middleware(['auth', 'verified'])->name('generos.store');
+
 //cart
 Route::post('update-cart', 'App\Http\Controllers\CartController@updateCart')->name('cart.update');
 Route::post('cart', 'App\Http\Controllers\CartController@add')->name('cart.store');

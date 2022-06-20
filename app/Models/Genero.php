@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Genero extends Model
 {
     use HasFactory;
+    public $timestamps=false;
+    protected $fillable=['nome','code'];
 
     public function filmes()
     {
